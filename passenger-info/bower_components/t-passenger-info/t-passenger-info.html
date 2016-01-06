@@ -1,0 +1,298 @@
+<!-- We are still creating this components -->
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../t-section-header/t-section-header.html" />
+<link rel="import" href="t-frequent-flyer.html">
+<link rel="import" href="t-passenger-segment.html">
+<!--
+    `<t-creditcard>` is a polymer component that generates a playground for interacting with components.
+
+    <div class="demo-canvas">
+        
+    </div>
+    the dummy json 
+
+
+
+value: [{"GenderString":"Male","DOB":"11/04/2003","DisplayTravelerType":null,"Id":0,"type":0,"FirstName":"sasa","LastName":"sa","MiddleName":"sa","Suffix":null,"DateOfBirth":{"date":"Tue, 04 Nov, 2003","systemDateTime":"0001-01-01T00:00:00","time":"12:00 AM"},"Gender":0,"EmailId":"sasa@sasa","RedressNumber":"222222222222"},{"GenderString":"Male","DOB":"11/04/2003","DisplayTravelerType":null,"Id":1,"type":0,"FirstName":"sasa","LastName":"asa","MiddleName":"s","Suffix":null,"DateOfBirth":{"date":"Tue, 04 Nov, 2003","systemDateTime":"0001-01-01T00:00:00","time":"12:00 AM"},"Gender":0,"EmailId":null,"RedressNumber":null},{"GenderString":"Male","DOB":"11/03/2003","DisplayTravelerType":null,"Id":2,"type":0,"FirstName":"sasa","LastName":"sasa","MiddleName":"sasa","Suffix":null,"DateOfBirth":{"date":"Mon, 03 Nov, 2003","systemDateTime":"0001-01-01T00:00:00","time":"12:00 AM"},"Gender":0,"EmailId":null,"RedressNumber":null},{"GenderString":"Male","DOB":"11/04/2013","DisplayTravelerType":null,"Id":3,"type":1,"FirstName":"sasa","LastName":"as","MiddleName":"sa","Suffix":null,"DateOfBirth":{"date":"Mon, 04 Nov, 2013","systemDateTime":"0001-01-01T00:00:00","time":"12:00 AM"},"Gender":0,"EmailId":null,"RedressNumber":null},{"GenderString":"Male","DOB":"11/04/2013","DisplayTravelerType":null,"Id":4,"type":1,"FirstName":"sasa","LastName":"sasa","MiddleName":"sas","Suffix":null,"DateOfBirth":{"date":"Mon, 04 Nov, 2013","systemDateTime":"0001-01-01T00:00:00","time":"12:00 AM"},"Gender":0,"EmailId":null,"RedressNumber":null}]
+
+
+    <t-creditcard metadata-source="metadata url" property-source="property url" component="component">
+        
+        <div class="component">
+            
+            'component template'
+        </div>
+    </t-creditcard>     
+-->
+<dom-module id="t-passenger-info">
+    <template>
+        <style>
+        :host {
+            width: 100%;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        
+        .vertical-margin {
+            margin-bottom: 10px;
+        }
+        
+        .vertical-margin t-input {
+            margin-right: 5px;
+        }
+        
+        .vertical-margin t-input:last-child {
+            margin-right: 0;
+        }
+        
+        .suffix {
+            width: 20%;
+        }
+        
+        .calendar {
+            margin-right: 5px;
+        }
+        
+        :host::content input {
+            text-transform: capitalize;
+        }
+        
+        .section {
+            padding: 0 10px;
+        }
+        </style>
+        <t-notify hidden$="{{!errorBlock}}" type="error" id="notify" message="{{errorMessage}}"></t-notify>
+        <div class="layout vertical">
+            <template is="dom-repeat" items="[[passengerData]]" as="passenger">
+                <t-passenger-segment passenger-index="{{_getDisplayIndex(passenger.type)}}" passenger="{{passenger}}"></t-passenger-segment>
+        </div>
+        </template>
+        </div>
+    </template>
+</dom-module>
+<script>
+(function() {
+    var adultIndex = 0,
+        childIndex = 0,
+        infantIndex = 0,
+        seniorIndex = 0;
+    Polymer({
+        is: 't-passenger-info',
+
+        properties: {
+            /**
+             * Response object of the form.
+             */
+            response: {
+                type: Object,
+                value: function() {
+                    return {};
+                }
+            },
+
+            /**
+             * NodeList of all fields present in the form.
+             */
+            fields: {
+                type: Array,
+                value: function() {
+                    return [];
+                }
+            },
+
+            departureDate: {
+                type: Object,
+                notify: true,
+                value: function() {
+                    return new Date();
+                }
+            },
+
+            passengerData: {
+                type: Array,
+                value: [{
+                    "GenderString": "Male",
+                    "DOB": "11/04/2003",
+                    "DisplayTravelerType": null,
+                    "Id": 0,
+                    "type": 0,
+                    "FirstName": "sasa",
+                    "LastName": "sa",
+                    "MiddleName": "sa",
+                    "Suffix": null,
+                    "DateOfBirth": {
+                        "date": "Tue, 04 Nov, 2003",
+                        "systemDateTime": "0001-01-01T00:00:00",
+                        "time": "12:00 AM"
+                    },
+                    "Gender": 0,
+                    "EmailId": "sasa@sasa",
+                    "RedressNumber": "222222222222"
+                }, {
+                    "GenderString": "Male",
+                    "DOB": "11/04/2003",
+                    "DisplayTravelerType": null,
+                    "Id": 1,
+                    "type": 0,
+                    "FirstName": "sasa",
+                    "LastName": "asa",
+                    "MiddleName": "s",
+                    "Suffix": null,
+                    "DateOfBirth": {
+                        "date": "Tue, 04 Nov, 2003",
+                        "systemDateTime": "0001-01-01T00:00:00",
+                        "time": "12:00 AM"
+                    },
+                    "Gender": 0,
+                    "EmailId": null,
+                    "RedressNumber": null
+                }, {
+                    "GenderString": "Male",
+                    "DOB": "11/03/2003",
+                    "DisplayTravelerType": null,
+                    "Id": 2,
+                    "type": 0,
+                    "FirstName": "sasa",
+                    "LastName": "sasa",
+                    "MiddleName": "sasa",
+                    "Suffix": null,
+                    "DateOfBirth": {
+                        "date": "Mon, 03 Nov, 2003",
+                        "systemDateTime": "0001-01-01T00:00:00",
+                        "time": "12:00 AM"
+                    },
+                    "Gender": 0,
+                    "EmailId": null,
+                    "RedressNumber": null
+                }, {
+                    "GenderString": "Male",
+                    "DOB": "11/04/2013",
+                    "DisplayTravelerType": null,
+                    "Id": 3,
+                    "type": 1,
+                    "FirstName": "sasa",
+                    "LastName": "as",
+                    "MiddleName": "sa",
+                    "Suffix": null,
+                    "DateOfBirth": {
+                        "date": "Mon, 04 Nov, 2013",
+                        "systemDateTime": "0001-01-01T00:00:00",
+                        "time": "12:00 AM"
+                    },
+                    "Gender": 0,
+                    "EmailId": null,
+                    "RedressNumber": null
+                }, {
+                    "GenderString": "Male",
+                    "DOB": "11/04/2013",
+                    "DisplayTravelerType": null,
+                    "Id": 4,
+                    "type": 1,
+                    "FirstName": "sasa",
+                    "LastName": "sasa",
+                    "MiddleName": "sas",
+                    "Suffix": null,
+                    "DateOfBirth": {
+                        "date": "Mon, 04 Nov, 2013",
+                        "systemDateTime": "0001-01-01T00:00:00",
+                        "time": "12:00 AM"
+                    },
+                    "Gender": 0,
+                    "EmailId": null,
+                    "RedressNumber": null
+                }],
+                notify: true
+            }
+
+        },
+
+        ready: function() {
+            this._setCalendar();
+        },
+
+        _getDisplayIndex: function(type) {
+            switch (type) {
+                case 0:
+                    adultIndex++;
+                    return adultIndex;
+                case 1:
+                    childIndex++;
+                    return childIndex;
+                case 2:
+                    seniorIndex++;
+                    return seniorIndex;
+                case 3:
+                    infantIndex++;
+                    return infantIndex;
+            }
+        },
+
+        _getType: function(type) {
+            switch (type) {
+                case 0:
+                    return "Adult" + " " + adultIndex;
+                case 1:
+                    return "Child" + " " + childIndex;
+                case 2:
+                    return "Senior" + " " + seniorIndex;
+                case 3:
+                    return "Infant" + " " + infantIndex;
+            }
+            return "";
+        },
+
+        _getName: function(type, index, value) {
+            var type = this._getType(type);
+            return type + index + '-' + value;
+        },
+
+        _setCalendar: function() {
+            var calArr = Polymer.dom(this.root).querySelectorAll('t-calendar');
+        },
+
+        _getMinDate: function(type) {
+            var date = new Date();
+            switch (type) {
+                case 1:
+                    return new Date(date.setFullYear(date.getFullYear() - 14));
+                case 3:
+                    return new Date(date.setFullYear(date.getFullYear() - 2));
+
+            }
+        },
+
+        _getMaxDate: function(type) {
+            var date = new Date();
+            switch (type) {
+                case 0:
+                    return new Date(date.setFullYear(date.getFullYear() - 12));
+                case 1:
+                    return new Date(date.setFullYear(date.getFullYear() - 2));
+                default:
+                    return new Date();
+
+            }
+        },
+
+        submitFunction: function(fields) {
+            if (this._validate()) {
+                var field = this.fields;
+                this.response.billingAddress = {};
+                for (a = 0; a < field.length; a++) {
+                    var fieldName = field[a].getAttribute("name");
+                    if (fieldName == 'line1' || fieldName == 'line2' || fieldName == 'type' || fieldName == 'country' || fieldName == 'state' || fieldName == 'city' || fieldName == 'zipCode' || fieldName == 'phoneNumber') {
+                        this.response.billingAddress[fieldName] = field[a].value;
+                    } else if (fieldName !== 'expiryDate') {
+                        this.response[fieldName] = field[a].value;
+                    } else {
+                        var expiryDate = field[a].value
+                        this.response['expiryMonth'] = field[a]._computeMonth(expiryDate);
+                        this.response['expiryYear'] = field[a]._computeYear(expiryDate);
+                    }
+                }
+            }
+        }
+    });
+})();
+</script>

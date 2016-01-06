@@ -1,0 +1,84 @@
+<!-- We are still creating this components -->
+<link rel="import" href="../polymer/polymer.html" />
+  
+<link rel="import" href="../iron-flex-layout/classes/iron-flex-layout.html" />
+<!--
+    `<t-creditcard>` is a polymer component that generates a playground for interacting with components.
+
+    <div class="demo-canvas">
+        
+    </div>
+
+    <t-creditcard metadata-source="metadata url" property-source="property url" component="component name">
+        
+        <div class="component">
+            
+            'component template'
+        </div>
+    </t-creditcard>     
+-->
+<dom-module id="t-passenger-detail">
+    <template>
+    <style>
+    :host {
+        width: 100%;
+        font-family: var(--primary-font-family,'Open sans');
+        font-size: var(--font-12,12px);
+        color: var(--grey-six,#333333);
+    }
+    .dob,.gender{
+        padding: 0 5px;
+        text-align:left;
+        width: 70px;
+    }
+    .dob{
+        text-align: right;
+    }
+    .textBlock{
+        margin: 10px;
+    }
+    .heading{
+        font-size: var(--font-12,12px);
+        font-weight: 600;
+        padding: 5px 0;
+        margin: 0 10px;
+        border-bottom: 1px solid;
+        border-color: var(--grey-two,#eeeeee);
+    }
+    </style>
+        <div class="heading">Travellers</div>
+        <div class="layout horizontal center textBlock">
+            <div class="name flex">
+                <span>Shailesh k Srivastva</span>
+            </div>
+            <div class="gender">
+                <span>Female</span>
+            </div>
+            <div class="dob">
+                <span>22/05/2015</span>
+            </div>
+        </div>
+        <div class="layout horizontal center textBlock">
+            <div class="name flex">
+                <span>Shailesh k Srivastva</span>
+            </div>
+            <div class="gender">
+                <span>Female</span>
+            </div>
+            <div class="dob">
+                <span>22/05/2015</span>
+            </div>
+        </div>
+    </template>
+</dom-module>
+<script>
+Polymer({
+
+    is: 't-passenger-detail',
+
+    properties: {
+       
+    }
+
+});
+</script>

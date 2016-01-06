@@ -1,0 +1,40 @@
+{
+    "name": "Star Rating",
+    "properties": [
+        {
+            "name": "Properties",
+            "fields": {
+                "customcharicon": {
+                    "name": "customcharicon",
+                    "type": "string",
+                    "value": null
+                },
+                "icon": {
+                    "name": "icon",
+                    "type": "string",
+                    "value": "star"
+                },
+                "rate": {
+                    "name": "rate",
+                    "type": "number",
+                    "value": 0
+                },
+                "readonly": {
+                    "name": "readonly",
+                    "type": "boolean",
+                    "value": false
+                },
+                "showtotals": {
+                    "name": "showtotals",
+                    "type": "boolean",
+                    "value": false
+                },
+                "stars": {
+                    "name": "stars",
+                    "type": "number",
+                    "value": 5
+                }
+            }
+        }
+    ]
+}

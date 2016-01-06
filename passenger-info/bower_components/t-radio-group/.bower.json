@@ -1,0 +1,46 @@
+{
+  "name": "t-radio-group",
+  "version": "0.0.0",
+  "authors": [
+    "Rahul Pilkhwal <rahul.pilkhwal@tavisca.com>",
+    "Shailesh Kumar Srivastava <ssrivastava@tavisca.com>",
+    "Sounak Pal <spal@tavisca.com>",
+    "Ajinkya Tejankar <tejankarajinkya@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "Polymer",
+    "Web",
+    "Components"
+  ],
+  "homepage": "https://github.com/atomelements/t-radio-group",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "iron-a11y-keys-behavior": "PolymerElements/iron-a11y-keys-behavior#1.0.5",
+    "iron-selector": "PolymerElements/iron-selector#1.0.2",
+    "t-radio-button": "atomelements/t-radio-button#0.0.0",
+    "polymer": "Polymer/polymer#^1.0.0"
+  },
+  "devDependencies": {
+    "webcomponentsjs": "~0.7.14",
+    "iron-component-page": "PolymerElements/iron-component-page#~1.0.6"
+  },
+  "_release": "0.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.0",
+    "commit": "f037b2f38770f9304b5a99f7cc0f4e873fcc748c"
+  },
+  "_source": "git://github.com/atomelements/t-radio-group.git",
+  "_target": "0.0.0",
+  "_originalSource": "atomelements/t-radio-group"
+}

@@ -1,0 +1,126 @@
+{
+    "rules": [{
+        "description": "We understand that sometimes your travel plans change. We do not charge a change or cancel fee. However, this property (Las Vegas Hostel) imposes the following penalty to its customers that we are required to pass on: Cancellations or changes made after 6:00 PM ((GMT-08:00) Pacific Time (US &amp; Canada); Tijuana) on Nov 25, 2015 are subject to a 1 Night Room &amp; Tax penalty. The property makes no refunds for no shows or early checkouts.",
+        "isQuantifiable": true,
+        "window": {
+            "start": {
+                "date": "Tue, 24 Nov, 2015",
+                "time": "9:18 PM",
+                "systemDateTime": "2015-11-24T21:18:55.4613695+05:30"
+            },
+            "end": {
+                "date": "Wed, 25 Nov, 2015",
+                "time": "6:00 PM",
+                "systemDateTime": "2015-11-25T18:00:00"
+            }
+        },
+        "penalty": {
+            "components": [{
+                "money": {
+                    "amount": 0.0,
+                    "currency": "USD",
+                    "displayAmount": "$0.00",
+                    "type": "USD"
+                },
+                "components": null,
+                "type": "BaseFare",
+                "properties": []
+            }, {
+                "money": {
+                    "amount": 0.0,
+                    "currency": "USD",
+                    "displayAmount": "$0.00",
+                    "type": "USD"
+                },
+                "components": null,
+                "type": "TotalFare",
+                "properties": []
+            }],
+            "additionalInfo": null
+        },
+        "type": "FreeCancellation"
+    }, {
+        "description": "",
+        "isQuantifiable": true,
+        "window": {
+            "start": {
+                "date": "Wed, 25 Nov, 2015",
+                "time": "6:01 PM",
+                "systemDateTime": "2015-11-25T18:01:00"
+            },
+            "end": {
+                "date": "Fri, 27 Nov, 2015",
+                "time": "6:00 PM",
+                "systemDateTime": "2015-11-27T18:00:00"
+            }
+        },
+        "penalty": {
+            "components": [{
+                "money": {
+                    "amount": 23.07,
+                    "currency": "USD",
+                    "displayAmount": "$23.07",
+                    "type": "USD"
+                },
+                "components": null,
+                "type": "BaseFare",
+                "properties": []
+            }, {
+                "money": {
+                    "amount": 23.07,
+                    "currency": "USD",
+                    "displayAmount": "$23.07",
+                    "type": "USD"
+                },
+                "components": null,
+                "type": "TotalFare",
+                "properties": []
+            }],
+            "additionalInfo": null
+        },
+        "type": "Cancellation"
+    }, {
+        "description": "Know Before You Go   Children 17 years old and younger are not permitted at this property.  Fees The following fees and deposits are charged by the property at time of service, check-in, or check-out.       Airport shuttle fee: USD 9.00 per person (roundtrip)              The above list may not be comprehensive. Fees and deposits may not include tax and are subject to change. Mandatory Fees and Taxes You'll be asked to pay the following charges at the hotel: Deposit: USD 10 per stay We have included all charges provided to us by the property. However, charges can vary, for example, based on length of stay or the room you book. ",
+        "isQuantifiable": false,
+        "window": null,
+        "penalty": null,
+        "type": "Disclaimer"
+    }, {
+        "description": "We understand that sometimes your travel plans change. We do not charge a change or cancel fee. However, this property (Las Vegas Hostel) imposes the following penalty to its customers that we are required to pass on: Cancellations or changes made after 6:00 PM ((GMT-08:00) Pacific Time (US &amp; Canada); Tijuana) on Nov 25, 2015 are subject to a 1 Night Room &amp; Tax penalty. The property makes no refunds for no shows or early checkouts.",
+        "isQuantifiable": false,
+        "window": null,
+        "penalty": null,
+        "type": "Cancellation"
+    }, {
+        "description": "By proceeding with this reservation, you agree to all terms and conditions, which include the Cancellation Policy and all terms and conditions contained in the User Agreement.  You agree to pay the cost of your reservation. If you do not pay this debt and it is collected through the use of a collection agency, an attorney, or through other legal proceedings, you agree to pay all reasonable costs or fees, including attorney fees and court costs, incurred in connection with such collection effort.",
+        "isQuantifiable": false,
+        "window": null,
+        "penalty": null,
+        "type": "Disclaimer"
+    }, {
+        "description": "Total amount will be charged by the ean after the booking.",
+        "isQuantifiable": false,
+        "window": null,
+        "penalty": null,
+        "type": "Charging"
+    }, {
+        "description": "Cancellation policy date and time is provided in local time of destination",
+        "isQuantifiable": false,
+        "window": null,
+        "penalty": null,
+        "type": "CancellationPolicyTimezone"
+    }, {
+        "description": "Fees the following fees and deposits are charged by the property at time of service, check-in, or check-out. Airport shuttle fee: usd 9.00 per person (roundtrip) deposit: usd 10 per stay the above list may not be comprehensive. Fees and deposits may not include tax and are subject to change.",
+        "isQuantifiable": false,
+        "window": null,
+        "penalty": null,
+        "type": "General"
+    }],
+    "status": {
+        "isSuccessful": true,
+        "code": 200,
+        "message": "Successful",
+        "referenceId": "4db4449d-843c-4b5a-ba6f-1df766206b08",
+        "additionalMessages": []
+    }
+}

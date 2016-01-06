@@ -1,0 +1,29 @@
+<link rel="import" href="../t-hotel-room-item.html">
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+<style>
+	*{
+		font-family: 'Open Sans';
+	}
+	body{
+		margin: 0;
+	}
+	t-button{
+		background: #07c5f2;
+		color: #fff;
+	}
+</style>
+<t-badge label="Something"></t-badge>
+
+<t-hotel-room-item></t-hotel-room-item>
+
+
+<script>
+	var item = document.querySelector('t-hotel-room-item');
+	item.roomDetail = "Bed in 10-Bed Dormitory with Shared Bathroom";
+	item.deals = ['1 night free with 2 nights','5 night free with 2 nights'];
+	item.currency = "USD";
+	item.price = "12,222.22";
+	item.discountedPrice = "33,222.22";
+	item.nightCount = 3;
+</script>

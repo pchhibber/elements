@@ -1,0 +1,532 @@
+﻿<!-- We are still creating this components -->
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../t-input/t-input.html" />
+<link rel="import" href="../t-notify/t-notify.html" />
+<link rel="import" href="../t-dropdown-menu/t-dropdown-menu.html" />
+<link rel="import" href="../t-radio-button/t-radio-button.html" />
+<link rel="import" href="../t-faredetails/t-faredetails.html" />
+<link rel="import" href="../iron-ajax/iron-ajax.html" />
+<!--
+    `<t-address>` is a polymer component that generates a playground for interacting with components.
+
+    <div class="demo-canvas">
+        
+    </div>
+
+    <t-address metadata-source="metadata url" property-source="property url" component="component name">
+        
+        <div class="component">
+            
+            'component template'
+        </div>
+    </t-address>     
+-->
+<dom-module id="t-insurance">
+    <template>
+        <style>
+        :host {
+            font-family: var(--primary-font-family, 'Open Sans');
+        }
+        
+        .section {
+            width: 100%;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            overflow: hidden;
+            display: block;
+            padding: 0 10px;
+        }
+        
+        .vertical-margin {
+            margin-bottom: 10px;
+        }
+        
+        .horizontal-margin {
+            padding-right: 5px;
+        }
+        
+        .section {
+            padding: 0 10px;
+        }
+        
+        .link {
+            text-decoration: none;
+           color: var(--link-color, #147be1);
+        }
+        
+        #spinner {
+            padding-bottom: 5px;
+        }
+        
+        p {
+            margin: 10px 0;
+            font-size: var(--font-12, 12px);
+            color: var(--grey-three, #bbbbbb);
+        }
+        t-section-header {
+            margin-bottom:10px;
+        }
+        /*insurance section css*/
+        .insurance-logo {
+            width:200px;
+        }
+        .insurance-logo-section {
+            border-bottom: 1px solid;
+            border-color: var(--grey-three, #bbbbbb);
+        }
+        .insurance-section {
+            padding:10px 0;
+        }
+        .travelguard-detail{
+            font-size: var(--font-12, 12px);
+            color: var(--grey-three, #bbbbbb);
+        }
+        .travelguard-detail ul{
+            margin: 10px 0 0 15px;
+            padding: 0;
+        }
+        #collapse{
+            max-height: 0px;
+            overflow: hidden;
+            -webkit-transition: max-height 0.3s ease-out ;
+            -moz-transition: max-height 0.3s ease-out ;
+            -ms-transition: max-height 0.3s ease-out ;
+            -o-transition: max-height 0.3s ease-out ;
+            transition: max-height 0.3s ease-out ;
+        }
+        #collapse.active{
+            max-height: 1000px;
+            -webkit-transition: max-height 0.3s ease-in ;
+            -moz-transition: max-height 0.3s ease-in ;
+            -ms-transition: max-height 0.3s ease-in ;
+            -o-transition: max-height 0.3s ease-in ;
+            transition: max-height 0.3s ease-in ;
+        }
+        </style>
+        <template is="dom-if" if="{{notEligibleInsurance}}">
+            <t-notify active type="warn" message="Sorry, we could not find any insurance products for your selected location. Please continue with your booking without insurance."></t-notify>
+        </template>
+        <div class="section travelguard-detail">
+            <div class="insurance-section insurance-logo-section">
+                <img class="insurance-logo" src="[[bannerImage]]" />
+            </div>
+            <div class="insurance-section">
+                Add travel insurance and travel worry-free! If you prefer NOT 
+                to purchase travel insurance simply say no... 
+                <a href="#" class="link"  id="toggleBtn" on-click="_collapseHide">more</a>
+                <div id="collapse">
+                    <ul>
+                        <li>A member could get sick</li>
+                        <li>You could lose your passport</li>
+                        <li>You could miss a flight connection</li>
+                        <li>Your baggage could be lost</li>
+                        <li>Your trip could be delayed</li>
+                        <li>You may need to make last minute hotel accommodation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <t-section-header label="Show Insurance Options for"></t-section-header>
+        <div class="section">
+            <div class="vertical-margin layout horizontal">
+                <div class="horizontal-margin flex">
+                    <t-dropdown-menu id="country" label="Country" selected-item-label="{{country}}" error-message="You missed this." name="country" required>
+                        <paper-menu class="dropdown-content" selected="[[_countryIndex]]">
+                            <template is="dom-repeat" items="{{countries.result}}">
+                                <paper-item data-code$="{{item.value}}">{{item.key}}</paper-item>
+                            </template>
+                        </paper-menu>
+                    </t-dropdown-menu>
+                </div>
+                <div class="flex">
+                    <div hidden$="{{!hasStates}}">
+                        <t-dropdown-menu label="State" id="state" name="state" required selected-item-label="{{state}}" error-message="You missed this.">
+                            <paper-menu class="dropdown-content" id="stateMenu" selected="[[_stateIndex]]">
+                                <template is="dom-repeat" items="{{states.result}}">
+                                    <paper-item data-code$="{{item.value}}">{{item.key}}</paper-item>
+                                </template>
+                            </paper-menu>
+                        </t-dropdown-menu>
+                    </div>
+                </div>
+            </div>
+            <div id="spinner" class="horizontal layout flex center-justified" hidden>
+                <t-loader id="loader" active></t-loader>
+            </div>
+            <template is="dom-if" if="{{eligibleInsurance}}">
+                <div class="vertical-margin">
+                    <t-radio-button on-change="_addInsurance" id="hasInsurance" checked="{{hasInsurance}}">Yes, I want to add insurance for <span>{{insuranceCost}}</span>.</t-radio-button>
+                    <p>Insurance includes certain coverage for trip cancellation, interruption, travel delays, loss of baggage and personal effects and much more. Learn more about the <a class="link" href="http://www.travelguard.com/disclaimer/" target="_blank">policy details.</a></p>
+                    <p>Coverage is offered by Travel Guard Group Inc. and limitations will apply.</p>
+                    <t-radio-button on-change="_removeInsurance" id="removeInsurance" checked="{{removeInsurance}}">No, I don’t want to add insurance.</t-radio-button>
+                </div>
+            </template>
+            <div hidden$="{{!hasInsurance}}">
+                <div class="vertical-margin">
+                    <t-input label="Address line 1" id="addressLine1" name="line1" error-message="You missed this." required></t-input>
+                </div>
+                <div class="vertical-margin">
+                    <t-input id="addressLine2" name="line2" label="Address line 2 (optional)"></t-input>
+                </div>
+                <div class="vertical-margin layout horizontal">
+                    <div class="horizontal-margin flex">
+                        <t-input auto-validate id="city" name="city" label="City" error-message="You missed this." required></t-input>
+                    </div>
+                    <div class="flex">
+                        <t-input id="zip" name="zipCode" label="Zip Code" max-length="50" auto-validate error-message="You missed this." required></t-input>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <t-faredetails id="fareDetails" data="[[fareDetail]]" passenger-details="[[passengerDetails]]"></t-faredetails>
+        <iron-ajax id="countryCall" method="GET" verbose headers='{"accept": "application/json"}' handle-as="json" content-type="application/json" on-response="_setCountries"></iron-ajax>
+        <iron-ajax id="statesCall" method="GET" verbose headers='{"accept": "application/json"}' handle-as="json" content-type="application/json" on-response="_statesChanged"></iron-ajax>
+        <iron-ajax id="insuranceCall" method="POST" verbose headers='{"accept": "application/json"}' handle-as="json" content-type="application/json" on-response="_insuranceQuoteChanged"></iron-ajax>
+    </template>
+</dom-module>
+<script>
+    Polymer({
+
+        is: 't-insurance',
+
+        properties: {
+
+            baseGeoApi: {
+                type: String,
+                value: "",
+                notify: true
+            },
+
+            bannerImage:String,
+
+            _countryIndex: Number,
+
+            _stateIndex: Number,
+
+            insuranceApi: {
+                type: String,
+                value: "",
+                notify: true
+            },
+
+            countries: {
+                type: Object,
+                value: null
+            },
+
+            states: {
+                type: Object,
+                value: function () {
+                    return null;
+                }
+            },
+
+            passengerDetails: {
+                type: Object
+            },
+
+            fareDetail: {
+                type: Array,
+                value: function () {
+                    return []
+                }
+            },
+
+            insurance: {
+                type: Object,
+                value: function () {
+                    return null;
+                },
+                notify: true
+            },
+
+            state: {
+                type: String,
+                notify: true,
+                observer: '_stateSelectedChanged'
+            },
+
+            hasStates: {
+                type: Boolean,
+                value: false
+            },
+
+            notEligibleInsurance: {
+                type: Boolean,
+                value: false
+            },
+            countryApi: {
+                type: String,
+                value: "",
+                notify: true
+            },
+
+            hasInsurance: {
+                type: Boolean,
+                value: false
+            },
+
+            removeInsurance: {
+                type: Boolean,
+                value: false
+            },
+
+            inventoryId: String,
+
+            country: {
+                type: String,
+                notify: true,
+                observer: '_countryChanged'
+            },
+
+            insuranceFareDetails: {
+                type: Object,
+                value: function () {
+                    return null;
+                },
+                notify: true
+
+            },
+
+            _archivedFareDetails: Object,
+
+            queryParams: {
+                type: String,
+                notify: true
+            }
+
+        },
+
+        ready: function () {
+            var component = this;
+            this.$.countryCall.url = this.countryApi + this.queryParams;
+            component.$.countryCall.generateRequest();
+        },
+
+        _addInsurance: function (event) {
+            this.$$('#removeInsurance').checked = false;
+            this.$.fareDetails.data = this.insuranceFareDetails;
+        },
+
+        _setCountries: function (event) {
+            this.countries = event.detail.response;
+            var component = this;
+            setTimeout(function () {
+                component.fire('countries-populated');
+            }, 0);
+        },
+
+        _removeInsurance: function (event) {
+            this.$$('#hasInsurance').checked = false;
+            this.$.fareDetails.data = this._archivedFareDetails;
+        },
+
+        _addLoader: function () {
+            this.$.spinner.hidden = false;
+            //this.$.loader.active = true;
+        },
+
+        _removeLoader: function () {
+            this.$.spinner.hidden = true;
+            //this.$.loader.active = false;
+        },
+
+        _collapseHide: function () {
+            if (this.$.collapse.classList.contains('active')) {
+                this.$.collapse.classList.remove('active');
+                this.$.toggleBtn.innerHTML = "more";
+            } else {
+                this.$.collapse.classList.add('active');
+                this.$.toggleBtn.innerHTML = "less";
+            }
+        },
+
+        _stateSelectedChanged: function () {
+            if (this.state === undefined || this.state === null || this.state === "")
+                return;
+            this.notEligibleInsurance = false;
+            this.eligibleInsurance = false;
+
+            this._addLoader();
+            var request = [{
+                "addressOfResidence": {
+                    "country": this.$.country.selectedItem.getAttribute('data-code'),
+                    "state": this.$$('#state').selectedItem.getAttribute('data-code'),
+                },
+                "inventoryId": this.inventoryId
+            }];
+            this.$.insuranceCall.body = JSON.stringify(request);
+            this.$.insuranceCall.url = this.insuranceApi + this.queryParams;
+            this.$.insuranceCall.generateRequest();
+
+        },
+
+
+        validate: function () {
+            var isValid = true;
+            if (this.hasInsurance) {
+                this.fields = this.querySelectorAll('t-input');
+                for (a = 0; a < this.fields.length; a++) {
+                    console.log(this.fields[a])
+                    if (this.fields[a].validate() != undefined) {
+                        isValid = isValid && (this.fields[a].validate() || this.fields[a].hidden);
+                    }
+                }
+                return isValid;
+            } else {
+                return isValid;
+            }
+        },
+
+        _insuranceQuoteChanged: function (event) {
+            if (this._archivedFareDetails == null) {
+                this._archivedFareDetails = this.$.fareDetails.data;
+            }
+
+            this._removeLoader();
+            var response = event.detail.response;
+            if (response.status.isSuccessful && response.quotes && response.quotes.length > 0) {
+                this.eligibleInsurance = true;
+                this.insurance = response.quotes[0].fare.components[0];
+                this.insurance.type = "Insurance";
+                this.insuranceCost = this.insurance.money.currency + " " + this.insurance.money.amount;
+
+                this._createInsuranceData();
+                if (!this.insuranceFareDetails && !this.hasInsurance) {
+                    var component = this;
+                    setTimeout(function () {
+                        component.$$('#hasInsurance').checked = false;
+                        component.$$('#removeInsurance').checked = false;
+                    }, 0);
+
+                }
+            } else {
+                this.notEligibleInsurance = true;
+                this.eligibleInsurance = false;
+            }
+        },
+
+        /*This has to refactor*/
+        _deepCopy: function (obj) {
+            return JSON.parse(JSON.stringify(obj));
+        },
+
+        _createInsuranceData: function () {
+            var totalFare;
+
+            this.insuranceFareDetails = this._deepCopy(this._archivedFareDetails);
+
+            totalFare = this.insuranceFareDetails.find(function (fare) {
+                return fare.type.toLowerCase() === 'totalfare';
+            });
+
+            totalFare.money.amount += this.insurance.money.amount;
+            totalFare.money.amount = totalFare.money.amount.toFixed(2);
+            this.insuranceFareDetails.push(this.insurance);
+        },
+
+        _countryChanged: function () {
+            //this.notEligibleInsurance = true;
+            this.eligibleInsurance = false;
+            this.state = null;
+            this.$.state._setSelectedItem(null);
+            this.$.stateMenu.selected = -1;
+
+            if (this.country !== undefined && this.country !== '') {
+                var countryCode = this.$.country.selectedItem.getAttribute('data-code');
+                this.$.statesCall.url = this.baseGeoApi + '/' + countryCode + '/states' + this.queryParams;
+                this.$.statesCall.generateRequest();
+                this._addLoader();
+            }
+        },
+
+        _setCountry: function (countryCode) {
+            var insuranceWidget = this;
+            var countries = [].slice.call(this.$.country.querySelectorAll('paper-item'));
+            countries.forEach(function (item, index) {
+                if (item.getAttribute('data-code').toLowerCase() == countryCode.toLowerCase())
+                    insuranceWidget._countryIndex = index;
+            });
+        },
+
+        _setState: function (stateCode) {
+            var insuranceWidget = this;
+            var states = [].slice.call(insuranceWidget.$$('#state').querySelectorAll('paper-item'));
+            states.forEach(function (item, index) {
+                if (item.getAttribute('data-code').toLowerCase() == stateCode.toLowerCase())
+                    insuranceWidget._stateIndex = index;
+            });
+        },
+
+        _statesChanged: function (event) {
+            var widget = this;
+            this.states = event.detail.response;
+            this._removeLoader();
+            this.hasStates = true;
+            this.notEligibleInsurance = false;
+            if (this.states != null && this.states.result.length > 0) {
+
+
+            } else {
+                /*this.hasStates = false;
+                this.notEligibleInsurance = true;
+                this.eligibleInsurance = false;*/
+                this.states = {
+                    "result": [{
+                        "key": "International",
+                        "value": "I"
+                    }],
+                    "status": {
+                        "isSuccessful": true,
+                        "code": 200,
+                        "message": "Successful",
+                        "referenceId": "c0c8bbbf-4876-4d11-be45-bd60c2408e4c",
+                        "additionalMessages": []
+                    }
+                };
+                if (this.insuranceFareDetails !== null) {
+                    this.$.fareDetails.data = this._archivedFareDetails;
+                    this.hasInsurance = false;
+                }
+            }
+            setTimeout(function () {
+                widget.fire('states-populated');
+            }, 0);
+        },
+
+        validate: function () {
+            var isValid = true;
+            this.fields = this.querySelectorAll('[name]');
+            for (a = 0; a < this.fields.length; a++) {
+                if (this.fields[a].validate() != undefined) {
+                    isValid = isValid && (this.fields[a].validate() || this.fields[a].hidden);
+                }
+            }
+            return isValid;
+        },
+
+        getAddress: function () {
+            var state = '';
+            var stateElement = this.$$('#state');
+            if (stateElement.is == 't-input')
+                state = stateElement.value;
+            else
+                state = stateElement.selectedItem.getAttribute('data-code');
+
+            var address = {
+                "addressLine1": this.$$('#addressLine1').value,
+                "addressLine2": this.$$('#addressLine2').value,
+                "city": this.$$('#city').value,
+                "state": state,
+                "country": this.$.country.selectedItem.getAttribute('data-code'),
+                "zip": this.$$('#zip').value,
+                "locationType": ""
+            };
+            return address;
+        }
+
+
+
+    })
+</script>

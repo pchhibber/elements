@@ -1,0 +1,270 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../t-radio-group/t-radio-group.html">
+<link rel="import" href="../t-autosuggest/t-autosuggest.html">
+<link rel="import" href="../t-radio-group/t-radio-group.html">
+<link rel="import" href="../t-radio-button/t-radio-button.html">
+<link rel="import" href="../t-calendar/t-calendar.html">
+<link rel="import" href="../t-button/t-button.html">
+<link rel="import" href="../t-dropdown/t-dropdown.html">
+<link rel="import" href="../iron-form/iron-form.html">
+<link rel="import" href="../paper-styles/paper-styles.html">
+<link rel="import" href="../t-progress/t-progress.html">
+
+<!--
+  `<t-autosuggest>` is a ajax driven autosuggestion component. 
+
+
+    <t-autosuggest data-url="http://localhost:3000/components/formComponents/t-autosuggest/data.json">
+    </t-autosuggest>   
+-->
+
+<dom-module id="t-search">
+<style is="custom-style">
+ :host{
+    font-family: var(--primary-font-family);
+    font-size: 12px;
+  }
+
+  .margin-vertical{
+    margin: 7px 0;
+  }
+  .margin-vertical:first-child{
+    margin-top: 14px;
+  }
+  
+  t-button::shadow paper-button paper-material.content{
+      padding: 12.5px 0;
+  }
+</style>
+  
+<template>
+  <div class="search layout vertical">
+  <div class="layout horizontal center center-justified margin-vertical">
+      <t-radio-group pill-button selected-item="{{tripType}}">
+      <t-radio-button name="OW">One-way</t-radio-button>
+      <t-radio-button name="RR">Round-trip</t-radio-button>
+    </t-radio-group>
+  </div>
+  <div class="margin-vertical">
+
+    <t-autosuggest id="source" required selected-value="{{source}}" class="center-justified" label="Origin" token-param="formattedAddress" data-url="{{suggestionUrl}}"></t-autosuggest>
+  </div>
+
+  <div class="margin-vertical">
+    <t-autosuggest id="destination" selected-value="{{destination}}" required label="Destination" token-param="formattedAddress" data-url="{{suggestionUrl}}"></t-autosuggest>
+  </div>
+
+  <div class="margin-vertical">
+    <t-calendar  id="go" required selected-date="{{travelDate}}" label="Departing" name="go" format="mm/dd/yyyy" submit-format="mm/dd/yyyy"></t-calendar>
+  </div>
+
+  <div class="margin-vertical" hidden$="{{_isRoundTrip}}">
+    <t-calendar id="return" required selected-date="{{returnDate}}" label="Returning" name="return" format="mm/dd/yyyy" submit-format="mm/dd/yyyy"></t-calendar>
+  </div>
+
+  <div class="margin-vertical">
+    <t-dropdown required selected-item-label="{{adults}}" name="adults" label="Adults">
+        <paper-item>1</paper-item>
+        <paper-item>2</paper-item>
+        <paper-item>3</paper-item>
+        <paper-item>4</paper-item>
+        <paper-item>5</paper-item>
+        <paper-item>6</paper-item>
+        <paper-item>7</paper-item>
+        <paper-item>8</paper-item>
+        <paper-item>9</paper-item>
+    </t-dropdown>
+  </div>
+
+  <div class="margin-vertical">
+    <t-dropdown required selected-item-label="{{children}}" name="children" label="Children">
+        <paper-item label="x">0</paper-item>
+        <paper-item>1</paper-item>
+        <paper-item>2</paper-item>
+        <paper-item>3</paper-item>
+        <paper-item>4</paper-item>
+        <paper-item>5</paper-item>
+        <paper-item>6</paper-item>
+        <paper-item>7</paper-item>
+        <paper-item>8</paper-item>
+        <paper-item>9</paper-item>    
+    </t-dropdown>
+  </div>
+
+  <div class="horizontal layout  margin-vertical">
+    <t-button class="flex primary" raised on-click="search" label="Search Flights"></t-button>
+  </div>
+
+  <div class="horizontal layout  center center-justified margin-vertical">
+    <h3 style="color:red">{{error}}</h3>
+  </div>
+</div>
+
+</template>
+
+</dom-module>
+
+<script>
+  Polymer({
+
+    is: 't-search',
+
+    properties:{
+
+      /**
+       * The from field
+       */      
+      source:String,
+
+      /**
+       * The destination
+       */
+      destination:String,
+
+      /**
+       * The travel date
+       */
+      travelDate:{type: String, value:'', notify:true, observer:'_travelDateChanged'},
+
+      /**
+       * The return date
+       */
+      returnDate:{type: String, value:'', notify:true, observer:'_returnDateChanged'},
+
+      /**
+       * The number of adult
+       */
+      adults:{type: Number, value:1},
+
+      /**
+       * The number of children
+       */
+      children:{type: Number, value:0},
+
+      /**
+       * The response objec as array
+       */      
+      suggestionUrl:String,
+
+      /**
+       * Put custom error msg
+       */
+      error:{type:String, value:''},
+
+      /**
+       * Check the trip type
+       */
+      tripType:{
+        type: String,
+        value: 'OW',
+        reflectToAttribute:true,
+        notify:true,
+        observer:'_tripTypeChanged'
+      },
+
+      /**
+       * Check the type of search if this is URL
+       */
+      searchType:{
+        type:String,
+        value:'event',
+        reflectToAttribute:true
+      },
+
+      /**
+       * Check if this is round trip
+       */
+      _isRoundTrip:{
+        type:Boolean,
+        computed:'_tripTypeChanged(tripType)'
+      },
+
+      deeplinkUrl:{
+        type:String,
+        value:'',
+        reflectToAttribute:true
+      }
+
+    },
+
+    _tripTypeChanged: function(tripType){
+      if(this.tripType == 'RR')
+        return false;
+      return true;
+    },
+
+    _isValid: function(){
+      return (this.$.from.validate() && this.$.to.validate() && this.$.go.validate() && this.$.return.validate());
+    },
+
+    _isValid: function(){
+      var isValid= (this.$.source.validate() && this.$.destination.validate() && this.$.go.validate());
+
+      if(isValid && this.tripType== 'RR')
+        return isValid && this.$.return.validate();
+      return isValid;
+    },
+
+    _travelDateChanged: function(){
+      if(this.tripType == 'RR'){
+        if(this.travelDate!= ''){
+          this.$.return.picker.set('min', this._getDateArray(this.travelDate));
+        }
+      }
+    }, 
+
+    _returnDateChanged: function(){
+      if(this.tripType == 'RR'){
+        if(this.returnDate!= ''){
+          this.$.go.picker.set('max', this._getDateArray(this.returnDate));
+        }
+      }
+    },
+
+    _getDateArray: function(dateString){
+      var date= new Date(dateString);
+      return [ 2015, date.getMonth(), date.getDate()];
+    },
+
+    _getDeeplinkUrl: function(){
+
+      var deeplink = this.deeplinkUrl;
+
+      if(this.triptype == 'RR')
+        deeplink = deeplink + "triptype=RoundTrip&";
+      else
+         deeplink = deeplink + "triptype=OneWay&";
+
+      deeplink = deeplink + "adults=" + this.adults + "&children=" + this.children + "&seniors=0&infants=0&nonstoponly=false&cabinclass=NoPreference&deploc1=" + this.$.source.selectedItem.code + "&arrloc1=" + this.$.destination.selectedItem.code + "&depdate1=" + this.travelDate +"&inda1=false&inaa1=false";
+      
+      if(this.triptype == 'RR')
+        deeplink = deeplink + "&deploc2=" + this.$.destination.selectedItem.code + "&arrloc2=" + this.$.source.selectedItem.code + "&depdate2="+ this.returnDate +"&inda2=false&inaa2=false";
+     
+      deeplink = deeplink + "&dateFormat=MM/dd/yyyy&culture=en-US&currency=USD&cid=mystiquedemo&update=true";
+     
+      return deeplink;
+    },
+
+    search: function(){
+      if(this._isValid()){
+        if(this.searchType== 'url'){
+          var win = window.open(this._getDeeplinkUrl(), '_blank');
+          win.focus();
+        }
+        else{
+          this.fire('on-search',{
+            "tripType": this.tripType,
+            "source":this.$.source.selectedItem,
+            "destination": this.$.destination.selectedItem,
+            "travelDate":this.travelDate,
+            "returnDate": this.returnDate,
+            "return": this.return,
+            "adults": parseInt(this.adults),
+            "children": parseInt(this.chldren)
+          });
+        }
+      }
+    }
+  })
+</script>

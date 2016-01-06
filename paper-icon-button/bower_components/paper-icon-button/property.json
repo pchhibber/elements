@@ -1,0 +1,22 @@
+{
+    "name": "Paper Icon Button",
+    "properties": [
+        {
+            "name": "Properties",
+            "fields": {
+                "alt": {
+                    "name": "alt",
+                    "type": "string"
+                },
+                "icon": {
+                    "name": "icon",
+                    "type": "string"
+                },
+                "src": {
+                    "name": "src",
+                    "type": "string"
+                }
+            }
+        }
+    ]
+}

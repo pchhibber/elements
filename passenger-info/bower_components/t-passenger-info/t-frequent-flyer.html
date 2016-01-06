@@ -1,0 +1,202 @@
+<!-- We are still creating this components -->
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../t-dropdown-menu/t-dropdown-menu.html" />
+<link rel="import" href="../t-section-header/t-section-header.html" />
+<dom-module id="t-frequent-flyer">
+    <template>
+        <style>
+        :host {
+            width: 100%;
+            display: block;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            font-family: var(--primary-font-family, 'Open sans');
+            font-size: var(--font-12, 12px);
+        }
+        
+        .header {
+            color: var(--link-color,#147be1);
+            padding: 0;
+            margin: 0;
+        }
+        
+        .toggle-section {
+            -webkit-transition: 0.3s ease all;
+            -moz-transition: 0.3s ease all;
+            -ms-transition: 0.3s ease all;
+            -o-transition: 0.3s ease all;
+            transition: 0.3s ease all;
+            overflow: hidden;
+            max-height: 0;
+        }
+        
+        :host([toggled]) .toggle-section {
+            max-height: 1000px;
+        }
+        
+        :host([toggled]) #icon {
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+        
+        .note {
+            color: var(--grey-three, #bbbbbb);
+            border-bottom: 1px solid;
+            border-color: var(--grey-three, #bbbbbb);
+            padding: 15px 0 5px;
+            margin-bottom: 5px;
+        }
+        
+        .sectionHeader {
+            padding: 5px 0;
+            border-bottom: 1px solid;
+            border-color: var(--grey-three, #bbbbbb);
+            margin: 10px 0;
+            font-weight: 600;
+        }
+        t-dropdown-menu,t-input{
+            margin-bottom: 10px;
+        }
+        </style>
+        <div class="layout vertical section">
+            <p class="header" on-click="_toggle">Frequent Flyer & Redress # (optional)
+                <iron-icon id="icon" icon="icons:arrow-drop-down"></iron-icon>
+            </p>
+            <div class="toggle-section">
+                <template is="dom-repeat" items="{{airlineList}}" as="airline">
+                    <div class="sectionHeader">{{airline.name}}</div>
+                    <t-dropdown-menu label="Program Name" id="programName" name="programName" data-code$="[[airline.code]]">
+                        <paper-menu class="dropdown-content" selected="0">
+                            <template is="dom-repeat" items="{{airline.programs}}" as="program">
+                                <template is="dom-repeat" items="[[program.lstOfMembershipProvider]]" as="provider">
+                                    <paper-item data-name$="[[program.name]]" data-code$="[[provider.code]]">{{_getItemName(provider.code,program.name)}}</paper-item>
+                                </template>
+                            </template>
+                        </paper-menu>
+                    </t-dropdown-menu>
+                    <t-input name="programNumber" data-code$="[[airline.code]]" label="Program Number"></t-input>
+                </template>
+                <div class="note" hidden$="[[_isEmpty(airlineList)]]">
+                    We share program details with the airline, though we cannot guarantee point awards.
+                </div>
+                <t-input id="redressNumber" name="redressNumber" label="Redress Number"></t-input>
+            </div>
+        </div>
+    </template>
+</dom-module>
+<script>
+    Polymer({
+
+        is: 't-frequent-flyer',
+
+        properties: {
+
+            toggled: {
+                type: Boolean,
+                value: false,
+                reflectToAttribute: true
+            },
+
+            airlineList: {
+                type: Array,
+                value: function () {
+                    return [];
+                },
+                notify: true
+            },
+
+            chosenPrograms: {
+                type: Array
+            },
+
+            passengerId: String,
+
+
+        },
+
+        ready: function () {
+            var component = this;
+            document.addEventListener('ff-programs-retrieved', function () {
+                setTimeout(function () {
+
+                    component.prefillSelectedPrograms();
+                }, 0);
+            });
+        },
+
+        _getItemName:function(code,name){
+            return code + " - " + name;
+        },
+
+        _toggle: function () {
+            this.toggled = !this.toggled;
+        },
+
+        _isEmpty: function (airlineList) {
+            return this.airlineList.length > 0;
+        },
+
+        prefillSelectedPrograms: function () {
+            var component = this;
+            this.chosenPrograms.forEach(function (program) {
+                var ffElements = component.querySelectorAll('[data-code=' + program.airlineCode + ']');
+                var ffArray = [].slice.call(ffElements);
+                ffArray.forEach(function (element) {
+                    if (element.tagName.toLowerCase() == 't-dropdown-menu') {
+                        var items = [].slice.call(element.querySelectorAll('paper-item'));
+                        items.forEach(function (item, index) {
+                            if (item.getAttribute('data-code').toLowerCase() == program.loyaltyProgramCode.toLowerCase()) {
+                                var menu = element.querySelector('paper-menu');
+                                menu.selected = index;
+                            }
+                        });
+                    } else {
+                        element.value = program.frequentFlyerNumber;
+                    }
+                });
+            });
+            this.$.redressNumber.value = this.chosenPrograms[0].redressNumber;
+        },
+
+        getOptedPrograms: function () {
+            var component = this;
+            var chosenPrograms = [];
+            this.airlineList.forEach(function (airline, index) {
+                var ffInput = component.querySelector('t-input[data-code=' + airline.code + ']');
+                var ffDropdown = component.querySelector('t-dropdown-menu[data-code=' + airline.code + ']');;
+                var redressInput = component.$.redressNumber;
+                if (ffInput.value !== undefined && ffInput.value.length > 0) {
+                    var program = {
+                        id: component._getUniqueCode(),
+                        paxId: component.passengerId,
+                        airlineCode: airline.code,
+                        loyaltyProgramCode: ffDropdown.selectedItem.getAttribute('data-code'),
+                        loyaltyProgramName: ffDropdown.selectedItem.getAttribute('data-name'),
+                        frequentFlyerNumber: ffInput.value,
+                        redressNumber: redressInput.value
+                    };
+                    chosenPrograms.push(program);
+                }
+            });
+            return chosenPrograms;
+        },
+
+
+        _getUniqueCode: function () {
+            var id = "";
+            var now = new Date();
+            id += now.getDate();
+            id += now.getHours();
+            id += now.getMinutes();
+            id += now.getSeconds();
+            id += now.getMilliseconds();
+            return id;
+        }
+
+
+    });
+</script>

@@ -1,0 +1,140 @@
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../iron-icons/iron-icons.html" />
+<link rel="import" href="../iron-icons/editor-icons.html" />
+<link rel="import" href="../iron-flex-layout/classes/iron-flex-layout.html" />
+<link rel="import" href="../t-button/t-button.html" />
+
+
+<dom-module id="t-header">
+    <template>
+    <style>
+    :host{
+        display: block;
+        position: relative;
+    }
+    .body {
+        font-family: var(--header-font-family, --primary-font-family);
+        color: var(--light-color, #fff);
+/*      padding: 0 10px;  */
+        background: var(--base-color-1, #147be1);
+        height: var(-t-header-size,55px);
+    }
+    :host([normal-heading]) a{
+        z-index: 1;
+    }
+    :host([normal-heading]) .header__mainRow{
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        left: 0;
+    }
+    :host([normal-heading]) .header__mainRow ::content h1{
+        margin: 0 auto;
+        font-size: 22px;
+        line-height: var(-t-header-size,55px);
+        font-weight: 300;
+    }
+    iron-icon{
+        background: transparent;
+        min-width: 0;
+        color:  var(--light-color, #fff);
+        height: 30px;
+        width: 30px;
+        padding: 10px 5px;
+    }
+    :host ::content p#detail{
+      -ms-flex-pack: start;
+      -webkit-justify-content: flex-start;
+      justify-content: flex-start;
+    }
+    </style>
+        <div class="layout horizontal center body">
+            <a on-click="_checkUrl">
+                <iron-icon icon="[[icon]]"></iron-icon>
+            </a>
+            <div class="layout horizontal center flex header__mainRow">
+                <template is="dom-if" if="{{!normalHeading}}">
+                    <content select="*"></content>
+                </template>
+                <template is="dom-if" if="{{normalHeading}}">
+                    <h1>{{label}}</h1>
+                </template>
+            </div>
+            <template is="dom-if" if="{{_hasRightIcon}}">
+                <a on-click="_rightButtonClick">
+                    <iron-icon icon="{{rightIcon}}"></iron-icon>
+                </a>
+            </template>
+        </div>
+    </template>
+</dom-module>
+<script>
+Polymer({
+
+    is: 't-header',
+
+    properties: {
+
+        /*The Label only works when the normal heading is set to true*/
+        label:{
+            type:String,
+            reflectToAttribute:true,
+            value:'Normal Heading'
+        },
+
+        icon:{
+            type:String,
+            value:'arrow-back'
+        },
+
+        url:{
+            type:String,
+            reflectToAttribute:true,
+            value:''
+        },
+
+        /*The Icon on the right.. Not works when the normal heading is set to true.*/
+        rightIcon:{
+            type:String,
+            reflectToAttribute:true,
+            value:''
+        },
+
+        /*to check whether the icon is there or not. This is required for the template if condition cause couldnt do it with 'if' function.*/
+        _hasRightIcon:{
+            type:Boolean,
+            computed:'_checkRightIcon(normalHeading,rightIcon)'
+        },
+
+        /*Normal heading is the boolean value to only put an icon and the header text.*/
+        normalHeading:{
+            type:Boolean,
+            reflectToAttribute:true,
+            value:false
+        }
+
+    },
+
+    /*to check if theres any icon present or not.*/
+    _checkRightIcon:function(normalHeading,rightIcon){
+        if(normalHeading)
+            return false;
+        if(rightIcon.length > 0)
+            return true;
+        return false;
+    },
+
+    _checkUrl:function(e){
+        if(this.url !== ""){
+            window.location.href = this.url;
+        }
+    },
+
+    /*to fire an event for the right icon click.*/
+    _rightButtonClick:function(){
+        this.fire('right-button-click');
+    }
+
+}) ;
+</script>

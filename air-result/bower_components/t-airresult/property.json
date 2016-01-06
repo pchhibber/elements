@@ -1,0 +1,20 @@
+{
+    "name": "Air Result",
+    "properties": [
+        {
+            "name": "Properties",
+            "fields": {
+                "inventories": {
+                    "name": "inventories",
+                    "type": "list",
+                    "value": "[]"
+                },
+                "spinnerState": {
+                    "name": "spinnerState",
+                    "type": "boolean",
+                    "value": true
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,316 @@
+<!-- We are still creating this components -->
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../t-section-header/t-section-header.html" />
+<link rel="import" href="t-frequent-flyer.html">
+<link rel="import" href="t-passenger-segment.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html" />
+<link rel="import" href="../iron-ajax/iron-request.html">
+<!--
+-->
+<dom-module id="t-air-passenger-info">
+    <template>
+        <style>
+        :host {
+            width: 100%;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        
+        .vertical-margin {
+            margin-bottom: 10px;
+        }
+        
+        .vertical-margin t-input {
+            margin-right: 5px;
+        }
+        
+        .vertical-margin t-input:last-child {
+            margin-right: 0;
+        }
+        
+        .suffix {
+            width: 20%;
+        }
+        
+        .calendar {
+            margin-right: 5px;
+        }
+        
+        :host::content input {
+            text-transform: capitalize;
+        }
+        .section ,t-frequent-flyer{
+            padding: 0 10px;
+        }
+        </style>
+        <t-notify hidden$="{{!errorBlock}}" type="error" id="notify" message="{{errorMessage}}"></t-notify>
+        <div class="layout vertical">
+            <template is="dom-repeat" items="[[passengerData]]" as="passenger">
+                <t-passenger-segment passenger-index="{{_getDisplayIndex(passenger.Type)}}" passenger="{{passenger}}"></t-passenger-segment>
+                <div class="vertical-margin layout">
+                    <t-frequent-flyer passenger-id="[[index]]" chosen-programs="[[passenger.optedPrograms]]" airline-list="[[airlineList]]" frequent-flyer-url="[[frequentFlyerUrl]]"></t-frequent-flyer>
+                </div>
+            </template>
+        </div>
+    </template>
+</dom-module>
+<script>
+(function() {
+    var adultIndex = 0,
+        childIndex = 0,
+        infantIndex = 0,
+        seniorIndex = 0;
+
+
+    Polymer({
+
+        is: 't-air-passenger-info',
+
+        properties: {
+            /**
+             * Response object of the form.
+             */
+            response: {
+                type: Object,
+                value: function() {
+                    return {};
+                }
+            },
+
+            frequentFlyerUrl: String,
+
+            frequentFlyerDetails: {
+                type: Array
+            },
+
+            departureDate: {
+                type: Object,
+                notify: true,
+                value: function() {
+                    return new Date();
+                }
+            },
+
+            _contentType: {
+                type: String,
+                value: 'application/json'
+            },
+
+            airlineList: {
+                type: Array,
+                notify: true,
+                observer: '_getLoyaltyPrograms'
+            },
+
+            passengerData: {
+                type: Array,
+                notify: true
+            }
+
+        },
+
+        ready: function() {
+            this._setCalendar();
+        },
+
+        _getDisplayIndex: function(type) {
+            switch (type) {
+                case 0:
+                    adultIndex++;
+                    return adultIndex;
+                case 1:
+                    childIndex++;
+                    return childIndex;
+                case 2:
+                    seniorIndex++;
+                    return seniorIndex;
+                case 3:
+                    infantIndex++;
+                    return infantIndex;
+            }
+        },
+
+        _getType: function(type) {
+            switch (type) {
+                case 0:
+                    return "Adult" + " " + adultIndex;
+                case 1:
+                    return "Child" + " " + childIndex;
+                case 2:
+                    return "Senior" + " " + seniorIndex;
+                case 3:
+                    return "Infant" + " " + infantIndex;
+            }
+            return "";
+        },
+
+        _getName: function(type, index, value) {
+            var type = this._getType(type);
+            return type + index + '-' + value;
+        },
+
+        _setCalendar: function() {
+            var calArr = Polymer.dom(this.root).querySelectorAll('t-calendar');
+        },
+
+        _getMinDate: function(type) {
+            var date = new Date();
+            switch (type) {
+                case 1:
+                    return new Date(date.setFullYear(date.getFullYear() - 14));
+                case 3:
+                    return new Date(date.setFullYear(date.getFullYear() - 2));
+
+            }
+        },
+
+        _getMaxDate: function(type) {
+            var date = new Date();
+            switch (type) {
+                case 0:
+                    return new Date(date.setFullYear(date.getFullYear() - 12));
+                case 1:
+                    return new Date(date.setFullYear(date.getFullYear() - 2));
+                default:
+                    return new Date();
+
+            }
+        },
+
+        get requestHeaders() {
+            var headers = {
+                'content-type': this._contentType
+            };
+            var header;
+
+            if (this.headers instanceof Object) {
+                for (header in this.headers) {
+                    headers[header] = this.headers[header].toString();
+                }
+            }
+
+            return headers;
+        },
+
+        _getLoyaltyPrograms: function() {
+            var component = this;
+            if (component.airlineList !== undefined && component.airlineList.length > 0) {
+                component.airlineList.forEach(function(airline, index) {
+                    var airlines = [];
+                    airlines.push(airline.code);
+                    component._getLoyaltyProgramsFor(airlines, index);
+                });
+            }
+        },
+
+        _getLoyaltyProgramsFor: function(airlines, index) {
+            var component = this;
+            var airlineCodes = airlines;
+            var xhr = document.createElement('iron-request');
+            xhr.completes.then(
+                function(request) {
+                    if (request.response !== undefined) {
+                        var code = airlineCodes[0];
+                        component._onLoyaltyResponse(request.response, code, index);
+                    }
+                }
+            ).catch(
+                //if request fails
+                //this.handleError.bind(this, request)
+            );
+            var requestOptions = {
+                url: this.frequentFlyerUrl,
+                method: 'POST',
+                body: JSON.stringify(airlineCodes),
+                handleAs: 'json',
+                headers: component.requestHeaders
+            };
+            xhr.send(requestOptions);
+        },
+
+        _onLoyaltyResponse: function(response, airlineCode, airlineIndex) {
+            var component = this;
+            var arrayIndex = -1;
+            this.airlineList.forEach(function(airline, index) {
+                if (airline.code.toLowerCase() === airlineCode.toLowerCase()) {
+                    arrayIndex = index;
+                    return;
+                }
+            });
+            if (response.status.isSuccessful) {
+                component.set('airlineList.' + arrayIndex + '.programs', response.result);
+            } else {
+                //remove airline from list if loyalty programs could not be fetched.
+                component.splice('airlineList',arrayIndex,1);
+            }
+            if (airlineIndex === this.airlineList.length - 1)
+                this._setChosenLoyaltyProgramsForPassengers();
+        },
+
+        _setChosenLoyaltyProgramsForPassengers: function() {
+            if (this.frequentFlyerDetails !== null && this.frequentFlyerDetails.length > 0) {
+                var component = this;
+
+                this.passengerData.forEach(function(passenger, paxId) {
+                    var chosenPrograms = [];
+                    component.frequentFlyerDetails.forEach(function(ff) {
+                        if (ff.paxId === paxId) {
+                            ff.redressNumber = component.passengerData[paxId].RedressNumber;
+                            chosenPrograms.push(ff);
+                        }
+                    });
+                    component.set('passengerData.' + paxId + '.optedPrograms', chosenPrograms);
+                    if (paxId == component.passengerData.length - 1)
+                        component.fire('ff-programs-retrieved');
+                });
+            }
+
+        },
+
+        getPassengerDetails: function() {
+            var segments = [].slice.call(this.querySelectorAll('t-passenger-segment'));
+            var frequentFlyerElements = [].slice.call(this.querySelectorAll('t-frequent-flyer'));
+
+            var validationFailed = false;
+            var passengerDetails = [];
+            segments.forEach(function(segment) {
+                var paxDetails = segment.getPassengerDetails();
+                if (paxDetails === null) {
+                    validationFailed = true;
+                } else {
+                    passengerDetails.push(paxDetails);
+                }
+            });
+
+            var frequentFlyerDetails = [];
+            frequentFlyerElements.forEach(function(ff) {
+                var programs = ff.getOptedPrograms();
+                if (programs !== undefined && programs.length > 0)
+                    frequentFlyerDetails = frequentFlyerDetails.concat(programs);
+            });
+
+            var paxDetailsWithFF = this._handleRedressNumbers(passengerDetails, frequentFlyerDetails);
+
+            if (!validationFailed)
+                this.fire('passenger-details-submit', paxDetailsWithFF);
+
+        },
+
+        _handleRedressNumbers: function(paxDetails, ffDetails) {
+            ffDetails.forEach(function(detail, index) {
+                if (detail.redressNumber && detail.redressNumber.length > 0) {
+                    paxDetails[detail.paxId].RedressNumber = detail.redressNumber;
+                    delete detail['redressNumber'];
+                }
+            });
+
+            var completeDetails = {
+                'passengerDetails': paxDetails,
+                'frequentFlyerDetails': ffDetails
+            };
+            return completeDetails;
+        }
+    });
+})();
+</script>

@@ -1,0 +1,44 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="t-badge">
+    <template>
+        <style>
+            span{
+            	background: var(--badge-bg,#f18722);
+                color: var(--light-color,#fff);
+                font-size: var(font-12,12px);
+                padding: 3px 10px;
+            	position: relative;
+                display: inline-block;
+            }
+    		span::after,span::before{
+    			content: "";
+    			position: absolute;
+    			left: 100%;
+    			width: 0;
+    			height: 0;
+    			border-right: 12px solid transparent;
+    		}
+            span::before{
+    			top: 0;
+    			border-top: 12px solid  var(--badge-bg,#f18722);
+    		}
+    		span::after{
+    			bottom: 0;
+    			border-bottom: 12px solid  var(--badge-bg,#f18722);
+    		}
+        </style>
+        <span>{{label}}</span>
+    </template>
+</dom-module>
+<script>
+Polymer({
+
+    is: 't-badge',
+
+    properties: {
+    	label:String
+    }
+
+});
+</script>

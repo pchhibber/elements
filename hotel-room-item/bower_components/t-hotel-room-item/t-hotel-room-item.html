@@ -1,0 +1,127 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-flex-layout/classes/iron-flex-layout.html">
+
+<link rel="import" href="../t-button/t-button.html" />
+<link rel="import" href="../t-badge/t-badge.html" />
+<link rel="import" href="../t-text-container/t-text-container.html">
+
+<dom-module id="t-hotel-room-item">
+    <template>
+        <style>
+        :host {
+            display: block;
+        }
+        .discount{
+            text-decoration: line-through;
+        }
+        t-badge {
+            margin-top: 10px;
+        }
+        .pricing{
+            text-align: right;
+        }
+        .min-width{
+            min-width: 10px;
+        }
+        .first-section{
+            margin-bottom: 10px;
+        }
+        t-text-container{
+            padding: 10px;
+            display: inline-block;
+        }
+        t-button{
+            font-size: 14px;
+        }
+        t-button ::content paper-button{
+            padding: 5px 10px;
+        }
+        </style>
+        <template is="dom-repeat" items="{{deals}}">
+            <div class="layout horizontal">
+                <t-badge label="{{item}}"></t-badge>
+            </div>
+        </template>
+        <t-text-container>
+            <div class="layout horizontal start first-section">
+                <div class="roomDetails font-16 primary-text">{{roomDetail}}</div>
+                <div class="flex min-width"></div>
+                <div class="layout vertical pricing">
+                    <template is="dom-if" if="{{_checkLength(discountedPrice)}}">
+                        <span class="font-12 secondary-text discount">{{discountedPrice}}</span>
+                    </template>
+                    <div class="layout horizontal center center-justified">
+                        <span class="font-12 secondary-text">{{currency}}</span>
+                        <span class="font-16 primary-text">{{price}}</span>
+                    </div>
+                    <div class="font-12 secondary-text">{{_getNightsCount(nightCount)}}</div>
+                </div>
+            </div>
+            <div class="layout horizontal end">
+                <div class="link-style font-12">Policy</div>
+                <div class="flex"></div>
+                <t-button label="Book" class="primary"></t-button>
+            </div>
+        </t-text-container>
+    </template>
+</dom-module>
+<script>
+Polymer({
+
+    is: 't-hotel-room-item',
+
+    properties: {
+
+        /*The array of deal items*/
+        deals: {
+            type: Array,
+            value: function() {
+                return [];
+            }
+        },
+
+        /*The description of the room*/
+        roomDetail:{
+            type: String,
+            value:''
+        },
+
+        /*The night Count is the total number of night the user is searching for.*/
+        nightCount:{
+            type: Number,
+            value:''
+        },
+
+        /*The currency of the fare.*/
+        currency:{
+            type: String,
+            value:''
+        },
+
+        /*The Discounted price of the fare.*/
+        discountedPrice:{
+            type: String,
+            value:''
+        },
+
+        /*The total fare of the room for 'n' number of nights.*/
+        price:{
+            type: String,
+            value:''
+        }
+    },
+
+    _getNightsCount: function(count) {
+        if (count > 1) {
+            return "for " + count + " nights";
+        } else {
+            return "for " + count + " night";
+        }
+    },
+
+    _checkLength:function(discountedPrice){
+        return discountedPrice.length>0?true:false;
+    }
+
+});
+</script>

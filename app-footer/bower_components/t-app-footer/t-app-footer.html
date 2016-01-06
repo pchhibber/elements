@@ -1,0 +1,106 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-flex-layout/classes/iron-flex-layout.html">
+
+<dom-module id="t-app-footer">
+    <template>
+    <style>
+        :host {
+            display: block;
+            padding: 10px 12px 10px;
+            height: 55px;
+            background: var(--grey-two, #eeeeee);
+            overflow: hidden;
+            color: var(--grey-four, #777777);
+            font-size: var(--footer-text-size, 10px);
+            font-family: var(--primary-font-family);
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        iron-icon {
+            width: 10px;
+            height: 10px;
+        }
+
+        img {
+            max-height: 20px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+    </style>
+    <div class="layout horizontal"> 
+        <div class="flex layout vertical">
+            <a href="{{logoUrl}}">
+                <img alt="Travlnxt" src="{{src}}">
+            </a>
+            <div>&copy; 2015 | All Rights Reserved. </div>
+        </div>
+        <div class="layout around-justified  vertical">
+                <div>
+                  <iron-icon icon="icons:mail"></iron-icon>
+                  <a href="{{emailHref}}">{{email}}</a>
+                </div>
+            <div>
+                <iron-icon icon="settings-phone"></iron-icon>
+                <a href="{{phoneHref}}">{{phone}}</a>
+
+            </div>
+        </div>
+      </div>
+    </template>
+</dom-module>
+<script>
+    Polymer({
+
+        is: 't-app-footer',
+
+        properties: {
+
+            src: {
+                type: String,
+                reflectToAttribute: true,
+                value: 'https://s3.amazonaws.com/tavisca.samplebucket/124850/Images/c9154425-43be-4a7a-9d44-463c97a58040'
+            },
+
+            logoUrl: {
+                type: String,
+                reflectToAttribute: true,
+                value: 'http://google.com'
+            },
+
+            email: {
+                type: String,
+                reflectToAttribute: true,
+                value: 'support@travelnxt.com'
+            },
+
+            phone: {
+                type: String,
+                reflectToAttribute: true,
+                value: '1-855-282-6507'
+            },
+
+            phoneHref: {
+                type: String,
+                reflectToAttribute: true,
+                computed: 'getPhone(phone)'
+            },
+            emailHref: {
+                type: String,
+                reflectToAttribute: true,
+                computed: 'getEmail(email)'
+            }
+        },
+        getPhone: function (a) {;
+            return "tel:" + a;
+        },
+        getEmail: function (a) {;
+            return "mailto:" + a;
+        }
+    });
+</script>

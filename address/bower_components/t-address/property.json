@@ -1,0 +1,33 @@
+{
+    "name": "Address",
+    "properties": [
+        {
+            "name": "Properties",
+            "fields": {
+                "baseGeoApi": {
+                    "name": "baseGeoApi",
+                    "type": "string",
+                    "value": ""
+                },
+                "country": {
+                    "name": "country",
+                    "type": "string"
+                },
+                "countryApi": {
+                    "name": "countryApi",
+                    "type": "string",
+                    "value": ""
+                },
+                "hasStates": {
+                    "name": "hasStates",
+                    "type": "boolean",
+                    "value": false
+                },
+                "queryParams": {
+                    "name": "queryParams",
+                    "type": "string"
+                }
+            }
+        }
+    ]
+}

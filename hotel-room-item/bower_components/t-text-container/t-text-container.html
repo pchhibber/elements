@@ -1,0 +1,35 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="t-text-container">
+    <template>
+        <style>
+        	:host ::content .font-16{
+        		font-size: var(--font-16,16px);
+        	}
+        	:host ::content .font-12{
+        		font-size: var(--font-12,12px);
+        	}
+        	:host ::content .primary-text{
+        		color: var(--grey-eight,#111111);
+        	}
+        	:host ::content .primary-light-text{
+        		color: var(--grey-six,#333333);
+        	}
+        	:host ::content .secondary-text{
+        		color: var(--grey-three,#bbbbbb);
+        	}
+        	:host ::content .link-style{
+        		color: var(--link-color,#0098ff);
+        		text-decoration: underline;
+        	}
+        </style>
+        <div><content select="*"></content></div>
+    </template>
+</dom-module>
+<script>
+Polymer({
+
+    is: 't-text-container',
+
+});
+</script>

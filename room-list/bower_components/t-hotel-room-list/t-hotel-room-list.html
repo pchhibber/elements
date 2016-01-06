@@ -1,0 +1,113 @@
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../iron-list/iron-list.html" />
+<link rel="import" href="../t-overlay/t-overlay.html" />
+<link rel="import" href="../t-text-container/t-text-container.html">
+<link rel="import" href="t-hotel-room-item.html" />
+<link rel="import" href="t-hotel-room-policy-list.html" />
+
+<dom-module id="t-hotel-room-list">
+<template>
+<style>
+	t-hotel-room-item{
+		 border-bottom: 1px solid var(--grey-two,#eeeeee);
+	}
+</style>
+	<t-text-container>
+		<template is="dom-if" if="{{_roomsLoading}}">
+	        <div class="section font-16 text-center">Please wait, we are getting available rooms and rates for your selected itinerary.</div>
+	        <div class="horizontal layout flex center-justified">
+                <t-loader active></t-loader>
+            </div>            
+	    </template>
+	    <template is="dom-if" if="{{_roomsFailed}}">
+	    	<t-notify active message="Sorry we are having difficulties confirming the availability of your selected itinerary. Please go back and select another."></t-notify>
+	    </template>
+	    <t-overlay header="Policies" id="overlay">  
+		    <t-hotel-room-policy-list>
+		    	<content select="#policyProvider"></content>     
+		    </t-hotel-room-policy-list>    
+	    </t-overlay>
+	    <iron-list items="{{rooms}}">        
+			<template>
+				<t-hotel-room-item room="[[item]]" itinerary="[[itinerary]]">
+				</t-hotel-room-item>
+			</template>
+	    </iron-list> 
+	    <content select="#roomProvider" ></content>
+	</t-text-container>               
+</template>
+</dom-module>
+
+<script>
+	Polymer({
+		is: "t-hotel-room-list",
+
+		properties: {
+			rooms: Array,
+
+			auto: Boolean,
+
+			itinerary: Object
+		},
+
+		_roomProvider: null,    
+
+		_roomsLoading: false,
+
+		_roomsFailed: false,
+
+		listeners: {
+			'room-policy': '_showRoomPolicy',
+		},
+		
+
+		attached: function(){
+			if(this.auto){
+				this.showRooms();
+			}
+		},
+
+		showRooms: function(){
+			this._checkAndSubscribeProvider();	
+			this._roomProvider.singleAvail();	
+			this._roomsLoading = true;
+		},
+
+		/**
+	     * search provider 
+	     */    
+	    _checkAndSubscribeProvider: function(){    
+	        this.set('_roomProvider', Polymer.dom(this).queryDistributedElements('#roomProvider')[0]);
+	        if(!this._roomProvider){
+	            console.error('no room list provider resolved with id #roomProvider');
+	        }
+	        if(typeof this._roomProvider.singleAvail != 'function'){
+	            console.error('no "singleAvail" function is present in given room list provider');
+	        }        
+	        this._roomProvider.addEventListener('success', this._successCallback.bind(this));
+	        this._roomProvider.addEventListener('error', this._errorCallback.bind(this));
+	    },
+
+	    _successCallback: function(event){
+	    	if(!event.detail || !event.detail.length){
+	    		this._errorCallback(event)
+	    		return;
+	    	}
+	    	
+	    	this.rooms = event.detail;
+	    	this._roomsLoading = false;
+	    },
+
+	    _errorCallback: function(event){
+	    	this._roomsLoading = false;
+	    	this._roomsFailed = true
+	    },
+
+	    _showRoomPolicy: function(event){
+	    	this.$.overlay.active = true;	    
+	    	Polymer.dom(this.root).querySelector('t-hotel-room-policy-list').querySelector('#policyProvider').inventoryId = event.detail.id;	    	
+	    	Polymer.dom(this.root).querySelector('t-hotel-room-policy-list').showPolicies();	    	
+	    },
+
+	});	
+</script>

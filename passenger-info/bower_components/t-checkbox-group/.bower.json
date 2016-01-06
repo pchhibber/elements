@@ -1,0 +1,45 @@
+{
+  "name": "t-checkbox-group",
+  "version": "0.0.0",
+  "authors": [
+    "Rahul Pilkhwal <rahul.pilkhwal@tavisca.com>",
+    "Shailesh Kumar Srivastava <ssrivastava@tavisca.com>",
+    "Sounak Pal <spal@tavisca.com>",
+    "Ajinkya Tejankar <tejankarajinkya@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "Polymer",
+    "Web",
+    "Components"
+  ],
+  "homepage": "https://github.com/atomelements/t-checkbox-group",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "t-checkbox": "atomelements/t-checkbox#0.0.0",
+    "iron-selector": "PolymerElements/iron-selector#1.0.2",
+    "polymer": "Polymer/polymer#^1.0.0"
+  },
+  "devDependencies": {
+    "webcomponentsjs": "~0.7.14",
+    "iron-component-page": "PolymerElements/iron-component-page#~1.0.6"
+  },
+  "_release": "0.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.0",
+    "commit": "3e85c73b9455bb4593eacfcb3c5dbba94e236e18"
+  },
+  "_source": "git://github.com/atomelements/t-checkbox-group.git",
+  "_target": "0.0.0",
+  "_originalSource": "atomelements/t-checkbox-group"
+}

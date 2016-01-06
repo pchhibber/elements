@@ -1,0 +1,46 @@
+{
+    "quotes": [{
+        "type": "Insurance",
+        "duration": null,
+        "referenceInventoryId": null,
+        "referenceRph": null,
+        "policyInfo": null,
+        "source": null,
+        "addressOfResidence": null,
+        "id": "0",
+        "fare": {
+            "type": null,
+            "code": null,
+            "isRefundable": false,
+            "components": [{
+                "money": {
+                    "amount": 25.64,
+                    "currency": "USD",
+                    "displayAmount": "USD 25.64"
+                },
+                "components": [{
+                    "amount": 25.64,
+                    "currency": "USD",
+                    "displayAmount": "USD 25.64"
+                }],
+                "type": "TotalFare",
+                "properties": []
+            }],
+            "equivalents": null
+        },
+        "isPostpaid": false,
+        "isCancellable": false,
+        "name": "Standard Product",
+        "description": null,
+        "inventoryId": "",
+        "rph": 0,
+        "status": null
+    }],
+    "status": {
+        "isSuccessful": true,
+        "code": 200,
+        "message": "Successful",
+        "referenceId": "ef7d49cc-2c39-4e5b-85db-87bc98387019",
+        "additionalMessages": []
+    }
+}

@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+  <title>t-hotel-room-list demo</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../t-hotel-room-list.html">
+  <link rel="import" href="../t-hotel-room-item.html" />
+  <link rel="import" href="../t-hotel-room-list-provider.html" />
+  <link rel="import" href="../t-hotel-room-policy-provider.html" />
+</head>
+<body>
+	<t-hotel-room-list >	
+		<t-hotel-room-list-provider id="roomProvider">
+		</t-hotel-room-list-provider>
+		<t-hotel-room-policy-provider id="policyProvider">
+		</t-hotel-room-policy-provider>		
+    </t-hotel-room-list>    
+</body>
+<script type="text/javascript">
+	var _provider = Polymer.dom(document.querySelector('t-hotel-room-list')).querySelector('#roomProvider');
+	_provider.apiBaseUrl = '../mock/';
+	_provider.apiRelativeUrl = 'hotel-rooms.json';
+	_provider.authToken = 'testtoken';
+	_provider.$.ajaxCall.method = 'GET';
+
+	var _policyProvider = Polymer.dom(document.querySelector('t-hotel-room-list')).querySelector('#policyProvider');
+	_policyProvider.apiBaseUrl = '../mock/';
+	_policyProvider.apiRelativeUrl = 'hotel-room-policies.json';
+	_policyProvider.authToken = 'testtoken';
+	_policyProvider.$.ajaxCall.method = 'GET';
+
+	var onRoomSelect = function(event){		
+		alert('room select event fired - ' + event.detail.name);
+	};
+
+	document.querySelector('t-hotel-room-list').addEventListener('room-select', onRoomSelect);
+
+	document.querySelector('t-hotel-room-list').showRooms();
+</script>
+</html>
+
+

@@ -1,0 +1,23 @@
+{
+    "name": "Mystique Auth",
+    "properties": [
+        {
+            "name": "Properties",
+            "fields": {
+                "cid": {
+                    "name": "cid",
+                    "type": "number"
+                },
+                "name": {
+                    "name": "name",
+                    "type": "string",
+                    "value": ""
+                },
+                "url": {
+                    "name": "url",
+                    "type": "string"
+                }
+            }
+        }
+    ]
+}

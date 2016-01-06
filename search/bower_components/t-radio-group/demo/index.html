@@ -1,0 +1,32 @@
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  
+
+
+    <link rel="import" href="../../t-radio-button/t-radio-button.html">
+    <link rel="import" href="../t-radio-group.html">
+<style is="custom-style">
+	t-radio-group ::content iron-selector {
+            width: 100%;
+    }
+    
+    t-radio-group ::content t-radio-button {
+        -ms-flex: 1;
+        -webkit-flex: 1;
+        flex: 1;
+        text-align: center;
+    }
+</style>
+
+
+      <t-radio-group selected-item="item1"  data='["item1","item2","item3"]'>
+      </t-radio-group>
+
+
+
+      <t-radio-group pill-button selected-item="item1"  data='["item1","item2","item3"]'>
+      </t-radio-group>
+      <t-radio-group pill-button selected-item="item1"  data='["item1","item2"]'>
+      </t-radio-group>
+
+

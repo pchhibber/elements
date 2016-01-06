@@ -1,0 +1,20 @@
+{
+    "name": "Passenger Info",
+    "properties": [
+        {
+            "name": "Properties",
+            "fields": {
+                "fields": {
+                    "name": "fields",
+                    "type": "list",
+                    "value": "[]"
+                },
+                "passengerData": {
+                    "name": "passengerData",
+                    "type": "list",
+                    "value": "[{\"GenderString\": Male, \"DOB\": 11/04/2003, \"DisplayTravelerType\": null, \"Id\": 0, \"type\": 0, \"FirstName\": sasa, \"LastName\": sa, \"MiddleName\": sa, \"Suffix\": null, \"DateOfBirth\": {\"date\": Tue, 04 Nov, 2003, \"systemDateTime\": 0001-01-01T00:00:00, \"time\": 12:00 AM}, \"Gender\": 0, \"EmailId\": sasa@sasa, \"RedressNumber\": 222222222222}, {\"GenderString\": Male, \"DOB\": 11/04/2003, \"DisplayTravelerType\": null, \"Id\": 1, \"type\": 0, \"FirstName\": sasa, \"LastName\": asa, \"MiddleName\": s, \"Suffix\": null, \"DateOfBirth\": {\"date\": Tue, 04 Nov, 2003, \"systemDateTime\": 0001-01-01T00:00:00, \"time\": 12:00 AM}, \"Gender\": 0, \"EmailId\": null, \"RedressNumber\": null}, {\"GenderString\": Male, \"DOB\": 11/03/2003, \"DisplayTravelerType\": null, \"Id\": 2, \"type\": 0, \"FirstName\": sasa, \"LastName\": sasa, \"MiddleName\": sasa, \"Suffix\": null, \"DateOfBirth\": {\"date\": Mon, 03 Nov, 2003, \"systemDateTime\": 0001-01-01T00:00:00, \"time\": 12:00 AM}, \"Gender\": 0, \"EmailId\": null, \"RedressNumber\": null}, {\"GenderString\": Male, \"DOB\": 11/04/2013, \"DisplayTravelerType\": null, \"Id\": 3, \"type\": 1, \"FirstName\": sasa, \"LastName\": as, \"MiddleName\": sa, \"Suffix\": null, \"DateOfBirth\": {\"date\": Mon, 04 Nov, 2013, \"systemDateTime\": 0001-01-01T00:00:00, \"time\": 12:00 AM}, \"Gender\": 0, \"EmailId\": null, \"RedressNumber\": null}, {\"GenderString\": Male, \"DOB\": 11/04/2013, \"DisplayTravelerType\": null, \"Id\": 4, \"type\": 1, \"FirstName\": sasa, \"LastName\": sasa, \"MiddleName\": sas, \"Suffix\": null, \"DateOfBirth\": {\"date\": Mon, 04 Nov, 2013, \"systemDateTime\": 0001-01-01T00:00:00, \"time\": 12:00 AM}, \"Gender\": 0, \"EmailId\": null, \"RedressNumber\": null}]"
+                }
+            }
+        }
+    ]
+}

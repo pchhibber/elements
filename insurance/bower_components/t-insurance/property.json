@@ -1,0 +1,70 @@
+{
+    "name": "Insurance",
+    "properties": [
+        {
+            "name": "Properties",
+            "fields": {
+                "bannerImage": {
+                    "name": "bannerImage",
+                    "type": "string"
+                },
+                "baseGeoApi": {
+                    "name": "baseGeoApi",
+                    "type": "string",
+                    "value": ""
+                },
+                "country": {
+                    "name": "country",
+                    "type": "string"
+                },
+                "countryApi": {
+                    "name": "countryApi",
+                    "type": "string",
+                    "value": ""
+                },
+                "fareDetail": {
+                    "name": "fareDetail",
+                    "type": "list",
+                    "value": "[]"
+                },
+                "hasInsurance": {
+                    "name": "hasInsurance",
+                    "type": "boolean",
+                    "value": false
+                },
+                "hasStates": {
+                    "name": "hasStates",
+                    "type": "boolean",
+                    "value": false
+                },
+                "insuranceApi": {
+                    "name": "insuranceApi",
+                    "type": "string",
+                    "value": ""
+                },
+                "inventoryId": {
+                    "name": "inventoryId",
+                    "type": "string"
+                },
+                "notEligibleInsurance": {
+                    "name": "notEligibleInsurance",
+                    "type": "boolean",
+                    "value": false
+                },
+                "queryParams": {
+                    "name": "queryParams",
+                    "type": "string"
+                },
+                "removeInsurance": {
+                    "name": "removeInsurance",
+                    "type": "boolean",
+                    "value": false
+                },
+                "state": {
+                    "name": "state",
+                    "type": "string"
+                }
+            }
+        }
+    ]
+}

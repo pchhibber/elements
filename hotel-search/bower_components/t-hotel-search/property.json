@@ -1,0 +1,22 @@
+{
+    "properties": [{
+        "name": "Properties",
+        "fields": {
+            "suggestionUrl": {
+                "name":"Autosuggest Api",
+                "type": "string",
+                "value": "http://atom.tavisca.com/demo/api/air/suggestions"
+            },
+            "searchType": {
+                "name":"Search Type",
+                "type": "string",
+                "value": "url"
+            },
+            "deeplinkUrl": {
+                "name":"Deeplink Search Url",
+                "type": "string",
+                "value": "http://demo.travelnxt.com/Flight/Interstitial?st=flight&action=search&"
+            }
+        }
+    }]
+}

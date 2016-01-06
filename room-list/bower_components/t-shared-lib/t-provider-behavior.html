@@ -1,0 +1,41 @@
+
+
+<script>
+    TravelNxt = window.TravelNxt || {};
+    TravelNxt.Behaviors = TravelNxt.Behaviors || {};
+    TravelNxt.Behaviors.ProviderBehavior = {
+        properties: {
+            apiBaseUrl: String,
+            apiRelativeUrl: String,
+            queryParams: Array,
+            authToken: String
+        },
+
+        _getUrl: function(){  
+            //sanitize urls before use
+            if(!this.apiBaseUrl && this.apiBaseUrl.lastIndexOf('/') == this.apiBaseUrl.length -1){                
+                this.set('apiBaseUrl', this.apiBaseUrl.substring(0, this.apiBaseUrl.length - 1));
+            }  
+            if(!this.apiRelativeUrl && this.apiRelativeUrl.firstIndexOf('/') != 0){                
+                this.set('apiRelativeUrl', '/' + this.apiRelativeUrl);
+            }        
+            return this.apiBaseUrl +  this.apiRelativeUrl + '?token=' + this.authToken;
+        },
+
+        _validateData: function(){
+            if(!this.apiBaseUrl){
+                console.error('apiBaseUrl can\'t be empty');
+                return false;
+            }
+            else if(!this.apiRelativeUrl){
+                console.error('apiRelativeUrl can\'t be empty');
+                return false;
+            }
+            else if(!this.authToken){
+                console.error('authToken can\'t be empty');
+                return false;
+            }
+            return true;            
+        }
+    };
+</script>

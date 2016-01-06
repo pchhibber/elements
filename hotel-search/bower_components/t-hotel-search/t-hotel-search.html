@@ -1,0 +1,196 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../t-autosuggest/t-autosuggest.html">
+<link rel="import" href="../t-calendar/t-calendar.html">
+<link rel="import" href="../t-button/t-button.html">
+<link rel="import" href="../t-stepper/t-stepper.html">
+<link rel="import" href="../t-dropdown-menu/t-dropdown-menu.html">
+<link rel="import" href="../t-shared-components/theme.html">
+<!--
+  `<t-autosuggest>` is a ajax driven autosuggestion component. 
+
+
+    <t-autosuggest data-url="http://localhost:3000/components/formComponents/t-autosuggest/data.json">
+    </t-autosuggest>   
+-->
+<dom-module id="t-hotel-search">
+    <template>
+        <style>
+        :host {
+            font-family: var(--primary-font-family);
+            display: block;
+            padding: 0 10px;
+        }
+        
+        .margin-horizontal {
+            margin-right: 5px;
+        }
+        .margin-horizontal:last-of-type {
+            margin-right: 0;
+        }
+        
+        :host > .layout {
+            margin: 15px 0;
+        }
+        .dropdown{
+            width: 33%;
+        }
+        </style>
+        <div class="horizontal flex layout">
+            <t-autosuggest id="location" name="location" required selected-item="{{response.destination}}" query-params="{{queryParams}}" class="flex" label="Search city, zip, address or landmark" token-param="formattedAddress" data-url="{{suggestionUrl}}" error-message="You missed this."></t-autosuggest>
+        </div>
+        <div class="horizontal layout">
+            <t-calendar class="flex margin-horizontal" required label="Check In" name="CALENDAR1" selected-date="{{response.checkInDate.date}}" error-msg="You missed this." format="dddd, dd mmm, yyyy" submit-format="ddd, dd mmm, yyyy">
+            </t-calendar>
+            <!-- margin-horizontal is for margin right -->
+            <t-calendar class="flex" required label="Check Out" name="CALENDAR2" selected-date="{{response.checkOutDate.date}}" error-msg="You missed this." format="dddd, dd mmm, yyyy" submit-format="ddd, dd mmm, yyyy">
+            </t-calendar>
+        </div>
+        <div class="horizontal layout">
+            <t-stepper class="flex" min="1" max="9" plural-label="Adults" singular-label="Adult" secondary-label="(12+ years)" count="{{rooms.adults.quantity}}" id="adult"></t-stepper>
+        </div>
+        <div class="horizontal layout">
+            <t-stepper class="flex" min="0" max="9" secondary-label="(0-11 years)" plural-label="Children" singular-label="Child" count="{{rooms.children.quantity}}" id="child"></t-stepper>
+        </div>
+        <div class="horizontal layout">
+            <template is="dom-repeat" items="{{rooms.children.ages}}" as="age">
+                <t-dropdown-menu name="{{index}}" class="dropdown margin-horizontal" label="Dinosaurs" required>
+		            <paper-menu class="dropdown-content" attr-for-selected="selection" selected="{{age}}">
+		              <template is="dom-repeat" items="[[ages]]" as="item">
+		                <paper-item selection="{{item.value}}">[[item.key]]</paper-item>
+		              </template>
+		            </paper-menu>
+		        </t-dropdown-menu>
+            </template>
+        </div>
+        <div class="horizontal layout">
+            <t-button class="primary flex" noink  label="Search Hotels" on-click="validate"></t-button>
+        </div>
+    </template>
+</dom-module>
+<script>
+Polymer({
+
+    is: 't-hotel-search',
+
+    properties: {
+
+       /* *
+         * The location to search from.
+         * Must be a value picked from suggested locations?.
+         
+        location: {
+            type: Object,
+            // value:'test',
+            notify: true
+        },*/
+
+        /**
+         * The response object
+         * 
+         */
+        response: {
+            type: Object,
+            // value:'test',
+            notify: true,
+            value: {
+                destination: {},
+                checkInDate: {
+                    "time": "12:00 AM"
+                },
+                checkOutDate: {
+                    "time": "12:00 AM"
+                },
+                rooms: [{
+                    adults: {
+                        quantity: 1,
+                        type: "Adult",
+                        ages: []
+                    },
+                    children: {
+                        quantity: 2,
+                        ages: ["4","1"],
+                        type: "Child"
+                    }
+                }],
+                preferences: {
+                    "hotelChains": null,
+                    "hotelName": "",
+                    "ratings": [
+                        "5",
+                        "4",
+                        "3"
+                    ],
+                    "amenities": null
+                },
+                responseContentType: null,
+                type: "Hotel"
+            }
+        },
+
+        rooms: {
+            type: Object,
+            computed: 'computeRoomsArray(response)',
+            notify:true,
+            observers: 'setData'
+
+        },
+
+
+        /**
+         * What is this??
+         */
+        ages: {
+            type: Array,
+            value: [{
+            	value:1,
+            	key:"<= 1year"
+            },{
+            	value:2,
+            	key:"1 - 2 years"
+            },{
+            	value:3,
+            	key:"2 - 3 years"
+            },{
+            	value:4,
+            	key:"3 - 4 years"
+            },{
+            	value:5,
+            	key:"4 - 5 years"
+            }]
+        },
+
+    },
+
+    observers: [
+       '_childrenCount(rooms.children.quantity)'
+    ],
+
+    computeRoomsArray: function(response) {
+    	alert(10);
+        return response.rooms[0]
+    },
+
+    _childrenCount: function() {
+        if(this.rooms.children.quantity == this.rooms.children.ages.length)
+        	return
+        if(this.rooms.children.quantity < this.rooms.children.ages.length)
+    		this.pop('rooms.children.ages')
+        if(this.rooms.children.quantity > this.rooms.children.ages.length)
+        	this.push('rooms.children.ages', "");
+
+    },
+
+    validate:function(){
+    	var x = this.querySelectorAll('[name]');
+    	for(var i = 0 ; i < x.length ; i++){
+    		var check = x[i].validate();
+    		if(!check){
+    			return
+    		}
+    	}
+    	this.fire('success');
+    	alert(2);
+    }
+
+});
+</script>

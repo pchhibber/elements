@@ -1,0 +1,127 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../t-calendar/t-calendar.html">
+
+<dom-module id="t-calendar-hotel">
+<style is="custom-style">
+  
+</style>
+  
+<template>
+  
+    <t-calendar id="one" detail$="{{detail}}" disabled-dates="{{disabledDates}}" required="{{required}}" label="{{label}}" name="{{name}}" submit-format="{{submitFormat}}" selected-date="{{selectedDate}}" error-msg="{{errorMsg}}" format="{{format}}" class=" t-calendar-0" no-label-float="{{noLabelFloat}}">
+    </t-calendar>
+</template>
+
+</dom-module>
+
+<script>
+  Polymer({
+
+    is: 't-calendar-hotel',
+
+      properties:{
+    /**
+     * Name property
+    */
+    name: {
+      type: String,
+      value: '',
+      reflectToAttribute: true
+    },      
+      
+    /**
+       * No label float is to make the label either on the body or on the top.
+       */
+      noLabelFloat: {
+        type:Boolean,
+        reflectToAttribute:true,
+        value:false,
+        observer:'_checkLabel'
+      },
+        
+    /**
+     * This attribute will return the selected date
+     */
+      selectedDate:{
+        type:String,
+        value:'',
+        reflectToAttribute:true,
+        notify:true
+      },
+
+    /**
+     * This attribute will put the default place holder of the input box
+     */
+      label:{
+        type: String,
+        reflectToAttribute: true,
+        value:'',
+        observer:'_checkLabel'
+      },
+
+    /**
+     * errorMsg is to put the error msg
+     */
+      errorMsg:{
+        type: String,
+        reflectToAttribute: true,
+        value:'Please select a date!'
+      },
+
+    /**
+     * This attribute will put the format of the date selected in the place holder.
+     *@default: dddd, dd mmm, yyyy
+     */
+      format:{
+        type:String,
+        value: 'dddd, dd mmm, yyyy',
+        reflectToAttribute:true,
+        notify:true
+      },
+
+
+    /**
+     * This attribute will put the submit format of the date selected in the place holder.
+     *@default: yyyy,mm,dd
+     */
+      submitFormat:{
+        type:String,
+        value: 'yyyy,mm,dd',
+        notify:true
+      },
+
+    /**
+     * Pass the array of dates to be disabled
+     *@default: null
+     */
+      disabledDates:{
+        type:Array,
+        value:function(){
+         return null;
+        }
+      },
+
+    /**
+     * This is for the input required
+     */
+      required:{
+        type:Boolean,
+        value:false,
+        reflectToAttribute:true
+      },
+
+      detail:{
+        type:Object,
+        observe:'_changeText'
+      }
+      
+    },
+
+    _changeText:function(){
+      console.log(detail);
+    }
+
+    
+  });
+</script>

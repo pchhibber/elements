@@ -1,0 +1,197 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-flex-layout/classes/iron-flex-layout.html">
+<link rel="import" href="../t-button/t-button.html" />
+<link rel="import" href="../t-badge/t-badge.html" />
+<link rel="import" href="../t-text-container/t-text-container.html">
+<link rel="import" href="../t-shared-lib/t-fare-behavior.html">
+<dom-module id="t-hotel-room-item">
+    <style>
+    :host {
+        display: block;
+    }
+    
+    .discount {
+        text-decoration: line-through;
+    }
+    
+    t-badge {
+        margin-top: 10px;
+    }
+    
+    .pricing {
+        text-align: right;
+        min-width: 75px;
+        line-height: 1.1;
+    }
+    
+    .min-width {
+        min-width: 10px;
+    }
+    
+    .first-section {
+        margin-bottom: 10px;
+    }
+    
+    t-text-container {
+        padding: 10px;
+        display: block;
+    }
+    
+    t-button {
+        font-size: 14px;
+    }
+    
+    t-button::content paper-button {
+        padding: 5px 10px;
+    }
+    
+    .button-section {
+        line-height: 1.3;
+    }
+    </style>
+    <template>
+        <template is="dom-repeat" items="{{_getPreferredDeal(room.deals)}}">
+            <div class="layout horizontal">
+                <template is="dom-if" if="{{item.name}}">
+                    <t-badge label="{{item.name}}"></t-badge>
+                </template>
+                <template is="dom-if" if="{{!item.name}}">
+                    <t-badge label="Deal"></t-badge>
+                </template>
+            </div>
+        </template>
+        <t-text-container>
+            <div class="layout horizontal start first-section">
+                <div class="layout vertical capitalize">
+                    <div class="font-16 primary-text ellipsis-2">{{_toLowerCase(room.name)}}</div>
+                    <div class="font-12 secondary-text ellipsis-2">{{_toLowerCase(room.description)}}</div>
+                </div>
+                <div class="flex min-width"></div>
+                <div class="layout vertical pricing">
+                    <div class="font-12 secondary-text">
+                        <span>USD</span>
+                        <template is="dom-if" if="{{_discount.money.amount}}">
+                            <span class="discount">{{_getDisplayFare(_totalFareWithOutDiscount)}}</span>
+                        </template>
+                    </div>
+                    <span class="font-16 primary-text">{{_getDisplayFare(_totalFare)}}</span>
+                    <div class="font-12 secondary-text">{{_getDisplayNightsCount(itinerary.stayDuration.start.date, itinerary.stayDuration.end.date)}}</div>
+                </div>
+            </div>
+            <div class="layout horizontal end">
+                <div class="layout vertical font-12 flex button-section">
+                    <template is="dom-if" if="{{room.inclusions}}">
+                        <div class="secondary-text ellipsis">Includes: <span class="primary-text">[[_getRoomInclusion(room.inclusions)]]</span></div>
+                    </template>
+                    <div class="link-style" on-click="_showPolicy">policy</div>
+                </div>
+                <div class="min-width"></div>
+                <t-button label="Book" class="primary" on-click="_bookRoom"></t-button>
+            </div>
+        </t-text-container>
+    </template>
+</dom-module>
+<script>
+Polymer({
+
+    is: 't-hotel-room-item',
+
+    properties: {
+        room: {
+            type: Object,
+            value: function() {
+                return {};
+            }
+        },
+
+        itinerary: Object
+    },
+
+    observers: ['_fareComponentsChanged(room.fare.components)'],
+
+    behaviors: [TravelNxt.Behaviors.FareBehavior],
+    
+    _getRoomInclusion:function(arr){
+        return arr.join(", ");
+    },
+
+    _toLowerCase: function(text) {
+        text = text || '';
+        return text.toLowerCase();
+    },
+
+    _fareComponentsChanged: function(components) {
+        this._components = components;
+    },
+
+    _getDisplayNightsCount: function(fromDate, toDate) {
+        if (!fromDate || !toDate)
+            return '';
+
+        var count = this._dateDiff(fromDate, toDate);
+        if (count > 1) {
+            return "for " + count + " nights";
+        } else {
+            return "for " + count + " night";
+        }
+    },
+
+    _dateDiff: function(fromDate, toDate) {
+        if (typeof fromDate == 'string')
+            fromDate = new Date(fromDate);
+        if (typeof toDate == 'string')
+            toDate = new Date(toDate);
+
+        var diff = toDate - fromDate;
+        var divideBy = (24 * 60 * 60 * 1000);
+
+        return Math.floor(diff / divideBy);
+    },
+
+    _getDisplayFare: function(fare) {
+        if (fare && fare.money) {
+            return parseInt(fare.money.amount);
+        }
+        return null;
+    },
+
+    _bookRoom: function() {
+        this.fire('room-select', this.room);
+    },
+
+    _showPolicy: function() {
+        this.fire('room-policy', this.room)
+    },
+
+    _getPreferredDeal: function(deals) {
+        if (!deals || !deals.length)
+            return;
+
+        var types = ['opaquedeal', 'placeholderforanytype', 'flatratedeal', 'percentagediscountdeal', 'discountdeal']; //low to high, placeholderforanytype is just to keep opaquedeal at low against any type
+
+        deals.sort(function(a, b) {
+            var aIndex = types.indexOf(a.type.toLowerCase());
+            var bIndex = types.indexOf(b.type.toLowerCase());
+            //set rank for random deal type higher than opaquedeal
+            if (aIndex == -1) {
+                aIndex = types.indexOf('placeholderforanytype');
+            }
+            if (bIndex == -1) {
+                bIndex = types.indexOf('placeholderforanytype');
+            }
+
+            //set lesser rank if deal name is missing
+            if (!b.name) {
+                bIndex = aIndex - 1;
+            }
+            if (!a.name) {
+                aIndex = bIndex - 1;
+            }
+
+            return bIndex - aIndex
+        });
+
+        return [deals[0]];
+    }
+});
+</script>

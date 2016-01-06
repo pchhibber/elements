@@ -1,0 +1,172 @@
+<!-- We are still creating this components -->
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../t-section-header/t-section-header.html" />
+<link rel="import" href="../t-calendar/t-calendar.html">
+<link rel="import" href="../t-radio-group/t-radio-group.html">
+<!--
+-->
+<dom-module id="t-passenger-segment">
+    <template>
+        <style>
+        :host {
+            width: 100%;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        
+        .vertical-margin {
+            margin-bottom: 10px;
+        }
+        
+        .vertical-margin t-input {
+            margin-right: 5px;
+        }
+        
+        .vertical-margin t-input:last-child {
+            margin-right: 0;
+        }
+        
+        .suffix {
+            width: 20%;
+        }
+        
+        .calendar {
+            margin-right: 5px;
+        }
+        
+        :host::content input {
+            text-transform: capitalize;
+        }
+        
+        .section {
+            padding: 0 10px;
+        }
+        </style>
+        <t-section-header label="[[_getLabel(passenger.Type, passengerIndex)]]"></t-section-header>
+        <div class="section">
+            <div class="vertical-margin layout horizontal center">
+                <t-input id="firstName" class="flex" label="First" name$="{{_getName(passenger.Type, 'firstName')}}" error-message="You missed this." required auto-validate value="{{passenger.FirstName}}"></t-input>
+            </div>
+            <div class="vertical-margin layout horizontal center">
+                <t-input id="middleName" class="flex" label="Middle" name$="{{_getName(passenger.Type,'middleName')}}" auto-validate value="{{passenger.MiddleName}}"></t-input>
+            </div>
+            <div class="vertical-margin layout horizontal center">
+                <t-input id="lastName" class="flex" label="Last" name$="{{_getName(passenger.Type,'lastName')}}" error-message="You missed this." required auto-validate value="{{passenger.LastName}}"></t-input>
+                <t-input id="suffix" class="suffix" label="Suffix" name$="{{_getName(passenger.Type,'suffix')}}" error-message="You missed this." required auto-validate value="{{passenger.Suffix}}"></t-input>
+            </div>
+            <div class="vertical-margin layout horizontal center center-justified">
+                <t-calendar id="dateOfBirth" class="flex calendar" is-dob name$="{{_getName(passenger.Type,'dob')}}" required label="Date of birth" min="{{_getMinDate(passenger.Type)}}" max="{{_getMaxDate(passenger.Type)}}" format="mm/dd/yyyy" submit-format="mm/dd/yyyy" selected-date="{{passenger.DOB}}" error-message="Enter date of birth"></t-calendar>
+                <t-radio-group id="gender" pill-button name$="{{_getName(passenger.Type,'gender')}}" selected-item="Male" data='["Male","Female"]'></t-radio-group>
+            </div>
+        </div>
+    </template>
+</dom-module>
+<script>
+(function() {
+    Polymer({
+        is: 't-passenger-segment',
+
+        properties: {
+
+            firstName: String,
+
+            middleName: String,
+
+            lastName: String,
+
+            suffix: String,
+
+            dateOfBirth: Object,
+
+            gender: String,
+
+            passenger: {
+                type: Array,
+                value: [],
+                notify: true
+            },
+
+        },
+
+        ready: function() {
+            this._setCalendar();
+        },
+
+        _getLabel: function(type) {
+            var typeLabel = this._getType(type);
+            return typeLabel + " " + this.passengerIndex;
+        },
+
+        _getType: function(type) {
+            switch (type) {
+                case 0:
+                    return "Adult";
+                case 1:
+                    return "Child";
+                case 2:
+                    return "Senior";
+                case 3:
+                    return "Infant";
+            }
+        },
+
+        _getName: function(type, value) {
+            var type = this._getType(type);
+            return type + this.passengerIndex + '-' + value;
+        },
+
+        _setCalendar: function() {
+            var calArr = Polymer.dom(this.root).querySelectorAll('t-calendar');
+        },
+
+        _getMinDate: function(type) {
+            var date = new Date();
+            switch (type) {
+                case 1:
+                    return new Date(date.setFullYear(date.getFullYear() - 14));
+                case 3:
+                    return new Date(date.setFullYear(date.getFullYear() - 2));
+
+            }
+        },
+
+        _getMaxDate: function(type) {
+            var date = new Date();
+            switch (type) {
+                case 0:
+                    return new Date(date.setFullYear(date.getFullYear() - 12));
+                case 1:
+                    return new Date(date.setFullYear(date.getFullYear() - 2));
+                default:
+                    return new Date();
+
+            }
+        },
+
+        _isValid: function() {
+            var isValid = this.$.firstName.validate();
+            isValid = this.$.lastName.validate() && isValid;
+            return this.$.dateOfBirth.validate() && isValid;
+        },
+
+        getPassengerDetails: function() {
+            if (this._isValid()) {
+                var passengerDetails = {
+                    'firstName': this.$.firstName.value,
+                    'middleName': this.$.middleName.value,
+                    'lastName': this.$.lastName.value,
+                    'suffix': this.$.suffix.value,
+                    'dob': this.$.dateOfBirth.selectedDate,
+                    'gender': this.$.gender.selectedItem,
+                    'type': this._getType(this.passenger.Type)
+                };
+                return passengerDetails;
+            }
+            return null;
+        }
+
+    });
+})();
+</script>

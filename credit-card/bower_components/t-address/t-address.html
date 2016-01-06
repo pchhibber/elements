@@ -1,0 +1,196 @@
+﻿<!-- We are still creating this components -->
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../t-input/t-input.html" />
+<link rel="import" href="../t-dropdown-menu/t-dropdown-menu.html" />
+<link rel="import" href="../iron-ajax/iron-ajax.html" />
+<link rel="import" href="../t-creditcard/t-phone-input.html" />
+<!--
+    `<t-address>` is a polymer component that generates a playground for interacting with components.
+
+    <div class="demo-canvas">
+        
+    </div>
+
+    <t-address metadata-source="metadata url" property-source="property url" component="component name">
+        
+        <div class="component">
+            
+            'component template'
+        </div>
+    </t-address>     
+-->
+<dom-module id="t-address">
+    <template>
+        <style>
+            :host {
+                width: 100%;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+                overflow: hidden;
+                display: block;
+                padding: 0 10px;
+            }
+
+            .vertical-margin {
+                margin-bottom: 10px;
+            }
+
+            .horizontal-margin {
+                padding-right: 5px;
+            }
+
+            .section {
+                padding: 0 10px;
+            }
+        </style>
+            <div class="vertical-margin">
+                <t-input auto-validate label="Address line 1" id="line1" name="line1" error-message="You missed this." required></t-input>
+            </div>
+            <div class="vertical-margin">
+                <t-input auto-validate id="line2" name="line2" label="Address line 2 (optional)"></t-input>
+            </div>
+            <div class="vertical-margin layout horizontal">
+                <div class="horizontal-margin flex">
+                    <t-dropdown-menu id="country" label="Country" selected-item-label="{{country}}" error-message="You missed this." name="country" required>
+                        <paper-menu class="dropdown-content">
+                            <template is="dom-repeat" items="{{countries.result}}">
+                                <paper-item data-code$="{{item.value}}">{{item.key}}</paper-item>
+                            </template>
+                        </paper-menu>
+                    </t-dropdown-menu>
+                </div>
+                <div class="flex">
+                    <template is="dom-if" if="{{hasStates}}">
+                    <t-dropdown-menu label="State" id="state" name="state" required error-message="You missed this.">
+                        <paper-menu class="dropdown-content">
+                            <template is="dom-repeat" items="{{states.result}}">
+                                <paper-item data-code$="{{item.value}}">{{item.key}}</paper-item>
+                            </template>
+                        </paper-menu>
+                    </t-dropdown-menu>
+                        </template>
+                        <t-input label="State" id="state" name="state" required hidden$="{{hasStates}}" error-message="You missed this."></t-input>
+                </div>
+            </div>
+            <div class="vertical-margin layout horizontal">
+                <div class="horizontal-margin flex">
+                    <t-input auto-validate id="city" name="city" label="City" error-message="Enter city" required ></t-input>
+                </div>
+                <div class="flex">
+                    <t-input id="zipCode" name="zipCode" label="Zip Code" max-length="50" auto-validate error-message="You missed this." required></t-input>
+                </div>
+            </div>
+            <div class="vertical-margin">
+                <t-input name="phoneNumber" id="phoneNumber" label="Phone"  pattern="^[\d, ,(,),+,-]+" max-length="20" error-message="You missed this." required auto-validate ></t-input>
+            </div>
+        <iron-ajax id="countryCall"  method="GET" verbose content-type="application/json" last-response="{{countries}}"></iron-ajax>
+        <iron-ajax id="statesCall" method="GET" verbose content-type="application/json" last-response="{{states}}"></iron-ajax>
+    </template> 
+</dom-module>
+<script>
+    Polymer({
+
+        is: 't-address',
+
+        properties: {
+
+            countryApi: {
+                type: String,
+                value: "",
+                notify: true
+            },
+
+            baseGeoApi: {
+                type: String,
+                value: "",
+                notify: true
+            },
+
+            countries: {
+                type: Object,
+                value: null
+            },
+
+            states: {
+                type: Object,
+                value: function () { return null; },
+                notify: true,
+                observer:'_statesChanged'
+
+            },
+
+            hasStates: {
+                type: Boolean,
+                value:false
+            },
+
+            country: {
+                type: String,
+                notify: true,
+                observer: '_countryChanged'
+            },
+
+            queryParams: {
+                type: String,
+                notify: true
+            }
+
+        },
+
+        attached: function () {
+            this.$.countryCall.url = this.countryApi + this.queryParams;
+            this.$.countryCall.generateRequest();
+        },
+
+        _countryChanged: function () {
+            if (this.country != undefined) {
+                var countryCode = this.$.country.selectedItem.getAttribute('data-code');
+                this.$.statesCall.url = this.baseGeoApi + "/" + countryCode + "/states" + this.queryParams;
+                this.$.statesCall.generateRequest();
+            }
+        },
+
+        _statesChanged: function () {
+            if (this.states != null && this.states.result.length > 0)
+                this.hasStates = true;
+            else
+                this.hasStates = false;
+        },
+
+        validate: function () {
+            var isValid = true;
+            this.fields = this.querySelectorAll('[name]');
+            for (a = 0; a < this.fields.length; a++) {
+                if (this.fields[a].validate() != undefined) {
+                    isValid = isValid && (this.fields[a].validate() || this.fields[a].hidden);
+                }
+            }
+            return isValid;
+        },
+
+        getAddress: function () {
+            var state = '';
+            var stateElement = this.$$('#state');
+            if (stateElement.is == 't-input')
+                state = stateElement.value;
+            else
+                state = stateElement.selectedItem.getAttribute('data-code');
+
+            var address = {
+                "line1": this.$.line1.value,
+                "line2": this.$.line1.value,
+                "city": this.$.city.value,
+                "state": state,
+                "country": this.$.country.selectedItem.getAttribute('data-code'),
+                "zipCode": this.$.zipCode.value,
+                "phoneNumber": this.$.phoneNumber.formattedValue,
+
+            };
+            return address;
+        }
+
+
+
+    })
+</script>

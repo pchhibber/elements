@@ -1,0 +1,74 @@
+<link rel="import" href="../polymer/polymer.html">
+ 
+<dom-module id="t-home-header">
+    <template>
+        <style>
+        :host {
+            display: block;
+            font-family: var(--header-font-family, --primary-font-family);
+            color: var(--light-color, #fff);
+            font-size: var(--header-font-size, 26px);
+            padding: 20px 15px 15px;
+            text-align: center;
+            background: var(--default-primary-color, #0e5398);
+            line-height: 1;
+        }
+        
+        a {
+            max-width: 180px;
+            display: inline-block;
+            line-height: inherit;
+            margin: 0 auto;
+        }
+        
+        img {
+            max-width: 100%;
+        }
+        
+        h2 {
+            font-size: inherit;
+            color: inherit;
+            line-height: inherit;
+            margin: 10px 0 0;
+            font-weight: 300;
+        }
+        </style>
+        <div class="body layout vertical">
+            <a href$="{{logoUrl}}">
+                <img src$="{{src}}" alt="{{label}}">
+            </a>
+            <h2>{{label}}</h2>
+        </div>
+    </template>
+</dom-module>
+<script>
+Polymer({
+
+    is: 't-home-header',
+
+    properties: {
+
+
+        src: {
+            type: String,
+            reflectToAttribute: true,
+            value: 'http://dev-capi.tavisca.com/NewUI/eva/Air/images/main-logo.png'
+        },
+
+        logoUrl: {
+            type: String,
+            reflectToAttribute: true,
+            value: '/'
+        },
+
+        label: {
+            type: String,
+            reflectToAttribute: true,
+            value: 'Flight Search'
+        }
+
+    }
+
+
+});
+</script>

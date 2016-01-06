@@ -1,0 +1,937 @@
+{
+    "inventory": {
+        "rating": 3.0,
+        "address": "3575 Las Vegas Blvd South Las Vegas NV 89109 US",
+        "phoneNumber": "",
+        "distance": 2.43,
+        "description": "Property Location Located in Las Vegas (The Strip), Hilton Grand Vacations Suites at the Flamingo is minutes from The Linq and High Roller. This casino resort is close to Las Vegas Convention Center and University of Nevada-Las Vegas. Rooms Make yourself at home in one of the 316 guestrooms featuring refrigerators and microwaves. 32-inch LCD televisions with cable programming provide entertainment, while wireless Internet access (surcharge) keeps you connected. Bathrooms have complimentary toiletries and hair dryers. Conveniences include phones, as well as safes and coffee/tea makers. Rec, Spa, Premium Amenities Dip into one of the 2 outdoor swimming pools or enjoy other recreational amenities including a steam room and a 24-hour fitness center. This resort also features wireless Internet access (surcharge), concierge services, and tour/ticket assistance. Dining You can find a meal at a coffee shop/café serving guests of Hilton Grand Vacations Suites at the Flamingo, or stop in at a snack bar/deli. Relax with your favorite drink at a bar/lounge or a poolside bar. Business, Other Amenities Featured amenities include high-speed (wired) Internet access (surcharge), a 24-hour business center, and complimentary newspapers in the lobby. Planning an event in Las Vegas? This resort has facilities measuring 946 square feet (88 square meters), including a meeting room. Free self parking is available onsite.",
+        "descriptions": [{
+            "key": "Dining",
+            "value": "You can find a meal at a coffee shop/café serving guests of Hilton Grand Vacations Suites at the Flamingo, or stop in at a snack bar/deli. Relax with your favorite drink at a bar/lounge or a poolside bar."
+        }, {
+            "key": "Recreation",
+            "value": "Hilton Grand Vacations Suites at the Flamingo features a heated outdoor pool, a spa tub, a 24-hour fitness center, and a sauna. In addition, guests enjoy complimentary access to the Flamingo Resort's tropical-style Go Pool (ages 21 and older) and family-friendly Beach Club Pool. The recreational activities listed below are available either on site or nearby; fees may apply."
+        }],
+        "heroImageUrl": "https://d3mj096p5q0e20.cloudfront.net/ti/HCM/934521/15482_69_z.jpg",
+        "geoCode": "36.11531,-115.1728",
+        "amenities": [{
+            "type": "Hotel",
+            "description": "24-hour business center"
+        }, {
+            "type": "Hotel",
+            "description": "24-hour front desk"
+        }, {
+            "type": "Hotel",
+            "description": "ATM/banking"
+        }, {
+            "type": "Hotel",
+            "description": "Bar/lounge"
+        }, {
+            "type": "Hotel",
+            "description": "Barbecue grill(s)"
+        }, {
+            "type": "Hotel",
+            "description": "Billiards or pool table"
+        }, {
+            "type": "Hotel",
+            "description": "Blackout drapes/curtains"
+        }, {
+            "type": "Room",
+            "description": "Cable TV service"
+        }, {
+            "type": "Hotel",
+            "description": "Children's pool"
+        }, {
+            "type": "Hotel",
+            "description": "Climate control"
+        }, {
+            "type": "Hotel",
+            "description": "Coffee shop or café"
+        }, {
+            "type": "Hotel",
+            "description": "Coffee/tea maker"
+        }, {
+            "type": "Hotel",
+            "description": "Concierge services"
+        }, {
+            "type": "Hotel",
+            "description": "Conference space size (feet) -946"
+        }, {
+            "type": "Hotel",
+            "description": "Conference space size (meters) -88"
+        }, {
+            "type": "Hotel",
+            "description": "Cookware, dishware, and utensils"
+        }, {
+            "type": "Hotel",
+            "description": "Daily housekeeping"
+        }, {
+            "type": "Hotel",
+            "description": "Dry cleaning/laundry service"
+        }, {
+            "type": "Room",
+            "description": "DVD player"
+        }, {
+            "type": "Hotel",
+            "description": "Elevator/lift"
+        }, {
+            "type": "Hotel",
+            "description": "Fitness Facility"
+        }, {
+            "type": "Hotel",
+            "description": "Free newspapers in lobby"
+        }, {
+            "type": "Hotel",
+            "description": "Free self parking"
+        }, {
+            "type": "Hotel",
+            "description": "Free toiletries"
+        }, {
+            "type": "Hotel",
+            "description": "Grocery/convenience store"
+        }, {
+            "type": "Hotel",
+            "description": "Hair dryer"
+        }, {
+            "type": "Hotel",
+            "description": "In-room safe"
+        }, {
+            "type": "Room",
+            "description": "Internet"
+        }, {
+            "type": "Room",
+            "description": "Internet"
+        }, {
+            "type": "Hotel",
+            "description": "Iron/ironing board"
+        }, {
+            "type": "Hotel",
+            "description": "Laundry facilities"
+        }, {
+            "type": "Room",
+            "description": "Lcd Tv"
+        }, {
+            "type": "Hotel",
+            "description": "Luggage storage"
+        }, {
+            "type": "Hotel",
+            "description": "Microwave"
+        }, {
+            "type": "Hotel",
+            "description": "Number of buildings/towers -1"
+        }, {
+            "type": "Hotel",
+            "description": "Number of floors -17"
+        }, {
+            "type": "Hotel",
+            "description": "Number of outdoor pools -2"
+        }, {
+            "type": "Hotel",
+            "description": "One meeting room"
+        }, {
+            "type": "Hotel",
+            "description": "Phone"
+        }, {
+            "type": "Hotel",
+            "description": "Poolside bar"
+        }, {
+            "type": "Room",
+            "description": "Premium TV channels"
+        }, {
+            "type": "Hotel",
+            "description": "Refrigerator"
+        }, {
+            "type": "Hotel",
+            "description": "Snack bar/deli"
+        }, {
+            "type": "Hotel",
+            "description": "Steam room"
+        }, {
+            "type": "Hotel",
+            "description": "Total number of rooms -316"
+        }, {
+            "type": "Hotel",
+            "description": "Tours/ticket assistance"
+        }, {
+            "type": "Hotel",
+            "description": "Vehicle Parking"
+        }, {
+            "type": "Hotel",
+            "description": "Year Built1999"
+        }],
+        "photoUrls": ["https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_69_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_49_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_57_z.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_50_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_55_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_58_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_59_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_80_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_47_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_66_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_67_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_68_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_60_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_72_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_62_z.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_65_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_63_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_70_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_56_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_84_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_86_z.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_87_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_88_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_82_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_89_b.jpg", "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/934521/15482_90_b.jpg"],
+        "pointsOfInterest": ["The Linq", "The Auto Collections", "Crystals at City Center", "Sands Expo Convention Center", "Fashion Show Mall", "National Atomic Testing Museum", "Desert Research Institute", "Las Vegas Convention Center", "Thomas and Mack Center", "University of Nevada Las Vegas", "Marjorie Barrick Museum", "Orleans Arena", "Las Vegas Country Club", "Clark County Library", "High Roller", "High Roller", "The Auto Collections", "Crystals at City Center", "Sands Expo Convention Center", "Fashion Show Mall", "National Atomic Testing Museum", "Desert Research Institute", "Las Vegas Convention Center", "Thomas and Mack Center", "University of Nevada Las Vegas", "Marjorie Barrick Museum", "Orleans Arena", "Las Vegas Country Club", "Clark County Library"],
+        "minFare": {
+            "areRatesAvailable": false,
+            "fare": {
+                "amount": 0.0,
+                "currency": null,
+                "displayAmount": "$0.00",
+                "type": null
+            },
+            "equivalentFares": [],
+            "equivalents": null
+        },
+        "rooms": [{
+            "id": "MjkxX18yNzE2ODVfXzkzNDUyMV9fNDc3LjYwX198MXwxOkE6MjV8X19TdHVkaW8gLSA0NTAgU3EgRnQsIFNsZWVwcyAyLUZyZWUgUGFya2luZ0ZyZWUgUGFya2luZyBSYXRlIFR5cGU6IFByZXBhaWQgRmFyZSBOb24tUmVmdW5kYWJsZSBGYXJlMHwxfDE6QToyNXw-",
+            "name": "Studio - 450 Sq Ft, Sleeps 2-Free Parking",
+            "description": "Free Parking Rate Type: Prepaid Fare Non-Refundable Fare",
+            "quantity": 1,
+            "isPrepaid": true,
+            "guaranteeRequired": false,
+            "depositRequired": false,
+            "policies": [{
+                "description": "This rate is non-refundable and cannot be changed or cancelled - if you do choose to change or cancel this booking you will not be refunded any of the payment.",
+                "isQuantifiable": false,
+                "window": null,
+                "penalty": null,
+                "type": "Cancellation"
+            }, {
+                "description": "By proceeding with this reservation, you agree to all terms and conditions, which include the Cancellation Policy and all terms and conditions contained in the User Agreement.  You agree to pay the cost of your reservation. If you do not pay this debt and it is collected through the use of a collection agency, an attorney, or through other legal proceedings, you agree to pay all reasonable costs or fees, including attorney fees and court costs, incurred in connection with such collection effort.",
+                "isQuantifiable": false,
+                "window": null,
+                "penalty": null,
+                "type": "Disclaimer"
+            }, {
+                "description": "Total amount will be charged by the ean after the booking.",
+                "isQuantifiable": false,
+                "window": null,
+                "penalty": null,
+                "type": "Charging"
+            }, {
+                "description": "For HotelFees - ResortFee of 56 USD   will be collected at the hotel.",
+                "isQuantifiable": false,
+                "window": null,
+                "penalty": null,
+                "type": "Disclaimer"
+            }, {
+                "description": "Fees The following fees and deposits are charged by the property at time of service, check-in, or check-out. Fee for in-room wireless Internet: USD Resort per stay (rates may vary) Fee for wireless Internet in public areas: USD Included in Resort Fee per stay (rates may vary) Fee for high-speed Internet (wired) in public areas: USD Included in Resort Fee per stay (rates may vary) Valet parking fee: USD 10 per night (in/out privileges) The above list may not be comprehensive. Fees and deposits may not include tax and are subject to change. Mandatory Fees and Taxes You'll be asked to pay the following charges at the hotel: Resort fee: USD 28.00 per accommodation, per night We have included all charges provided to us by the property. However, charges can vary, for example, based on length of stay or the room you book.",
+                "isQuantifiable": false,
+                "window": null,
+                "penalty": null,
+                "type": "General"
+            }],
+            "fare": {
+                "type": "Negotiated",
+                "code": null,
+                "isRefundable": false,
+                "components": [{
+                    "money": {
+                        "amount": 438.0,
+                        "currency": "USD",
+                        "displayAmount": "$438.00",
+                        "type": "USD"
+                    },
+                    "components": [],
+                    "type": "BaseFare",
+                    "properties": []
+                }, {
+                    "money": {
+                        "amount": 10.45,
+                        "currency": "USD",
+                        "displayAmount": "$10.45",
+                        "type": "USD"
+                    },
+                    "components": [],
+                    "type": "Discount",
+                    "properties": [{
+                        "key": "Type",
+                        "value": "Supplier"
+                    }]
+                }, {
+                    "money": {
+                        "amount": 50.05,
+                        "currency": "USD",
+                        "displayAmount": "$50.05",
+                        "type": "USD"
+                    },
+                    "components": [],
+                    "type": "Tax",
+                    "properties": [{
+                        "key": "Type",
+                        "value": null
+                    }, {
+                        "key": "Code",
+                        "value": null
+                    }, {
+                        "key": "Description",
+                        "value": "TaxAndServiceFee"
+                    }]
+                }, {
+                    "money": {
+                        "amount": 477.60,
+                        "currency": "USD",
+                        "displayAmount": "$477.60",
+                        "type": "USD"
+                    },
+                    "components": [],
+                    "type": "TotalFare",
+                    "properties": []
+                }, {
+                    "money": {
+                        "amount": 0.0,
+                        "currency": "USD",
+                        "displayAmount": "$0.00",
+                        "type": "USD"
+                    },
+                    "components": [],
+                    "type": "TotalFee",
+                    "properties": []
+                }, {
+                    "money": {
+                        "amount": 50.05,
+                        "currency": "USD",
+                        "displayAmount": "$50.05",
+                        "type": "USD"
+                    },
+                    "components": [],
+                    "type": "TotalTax",
+                    "properties": []
+                }, {
+                    "money": {
+                        "amount": 10.45,
+                        "currency": "USD",
+                        "displayAmount": "$10.45",
+                        "type": "USD"
+                    },
+                    "components": [],
+                    "type": "TotalDiscount",
+                    "properties": []
+                }],
+                "equivalents": null
+            },
+            "type": "271685",
+            "roomOccupancyTypes": ["|1|1:A:25|"],
+            "dailyRates": [{
+                "day": "Saturday",
+                "amount": 0.0,
+                "currency": null,
+                "displayAmount": " 0",
+                "type": null
+            }, {
+                "day": "Sunday",
+                "amount": 0.0,
+                "currency": null,
+                "displayAmount": " 0",
+                "type": null
+            }],
+            "inclusions": ["Free Parking"],
+            "isPreferred": false,
+            "deals": [{
+                "amount": {
+                    "amount": 10.45,
+                    "currency": "USD",
+                    "displayAmount": "$10.45",
+                    "type": "USD"
+                },
+                "name": "Book now and save! - flatratedeal",
+                "description": null,
+                "duration": {
+                    "start": {
+                        "date": "Sat, 05 Mar, 2016",
+                        "time": "12:00 AM",
+                        "systemDateTime": "2016-03-05T00:00:00"
+                    },
+                    "end": {
+                        "date": "Mon, 07 Mar, 2016",
+                        "time": "12:00 AM",
+                        "systemDateTime": "2016-03-07T00:00:00"
+                    }
+                },
+                "type": "flatratedeal"
+            },
+            {
+                "amount": {
+                    "amount": 10.45,
+                    "currency": "USD",
+                    "displayAmount": "$10.45",
+                    "type": "USD"
+                },
+                "name": "Book now and save! - DiscountDeal",
+                "description": null,
+                "duration": {
+                    "start": {
+                        "date": "Sat, 05 Mar, 2016",
+                        "time": "12:00 AM",
+                        "systemDateTime": "2016-03-05T00:00:00"
+                    },
+                    "end": {
+                        "date": "Mon, 07 Mar, 2016",
+                        "time": "12:00 AM",
+                        "systemDateTime": "2016-03-07T00:00:00"
+                    }
+                },
+                "type": "DiscountDeal"
+            },
+            {
+                "amount": {
+                    "amount": 10.45,
+                    "currency": "USD",
+                    "displayAmount": "$10.45",
+                    "type": "USD"
+                },
+                "name": "Book now and save! -- random",
+                "description": null,
+                "duration": {
+                    "start": {
+                        "date": "Sat, 05 Mar, 2016",
+                        "time": "12:00 AM",
+                        "systemDateTime": "2016-03-05T00:00:00"
+                    },
+                    "end": {
+                        "date": "Mon, 07 Mar, 2016",
+                        "time": "12:00 AM",
+                        "systemDateTime": "2016-03-07T00:00:00"
+                    }
+                },
+                "type": "random"
+            },
+            {
+                "amount": {
+                    "amount": 10.45,
+                    "currency": "USD",
+                    "displayAmount": "$10.45",
+                    "type": "USD"
+                },
+                "name": "Book now and save! -- percentagediscountdeal",
+                "description": null,
+                "duration": {
+                    "start": {
+                        "date": "Sat, 05 Mar, 2016",
+                        "time": "12:00 AM",
+                        "systemDateTime": "2016-03-05T00:00:00"
+                    },
+                    "end": {
+                        "date": "Mon, 07 Mar, 2016",
+                        "time": "12:00 AM",
+                        "systemDateTime": "2016-03-07T00:00:00"
+                    }
+                },
+                "type": "percentagediscountdeal"
+            },
+            {
+                "amount": {
+                    "amount": 10.45,
+                    "currency": "USD",
+                    "displayAmount": "$10.45",
+                    "type": "USD"
+                },
+                "name": "Book now and save! -- opaquedeal",
+                "description": null,
+                "duration": {
+                    "start": {
+                        "date": "Sat, 05 Mar, 2016",
+                        "time": "12:00 AM",
+                        "systemDateTime": "2016-03-05T00:00:00"
+                    },
+                    "end": {
+                        "date": "Mon, 07 Mar, 2016",
+                        "time": "12:00 AM",
+                        "systemDateTime": "2016-03-07T00:00:00"
+                    }
+                },
+                "type": "opaquedeal"
+            },
+            {
+                "amount": {
+                    "amount": 10.45,
+                    "currency": "USD",
+                    "displayAmount": "$10.45",
+                    "type": "USD"
+                },
+                "name": "Book now and save! -- discountdeal 22",
+                "description": null,
+                "duration": {
+                    "start": {
+                        "date": "Sat, 05 Mar, 2016",
+                        "time": "12:00 AM",
+                        "systemDateTime": "2016-03-05T00:00:00"
+                    },
+                    "end": {
+                        "date": "Mon, 07 Mar, 2016",
+                        "time": "12:00 AM",
+                        "systemDateTime": "2016-03-07T00:00:00"
+                    }
+                },
+                "type": "discountdeal"
+            }],
+            "source": {
+                "inventoryId": "MjkxX18yNzE2ODVfXzkzNDUyMV9fNDc3LjYwX198MXwxOkE6MjV8X19TdHVkaW8gLSA0NTAgU3EgRnQsIFNsZWVwcyAyLUZyZWUgUGFya2luZ0ZyZWUgUGFya2luZyBSYXRlIFR5cGU6IFByZXBhaWQgRmFyZSBOb24tUmVmdW5kYWJsZSBGYXJlMHwxfDE6QToyNXw-",
+                "id": 291,
+                "name": "247ETH3"
+            },
+            "areExtraTaxesApplicable": false,
+            "numberOfAvailableRooms": 0
+        }, {
+            "id": "MjkxX18yNzE2ODVfXzkzNDUyMV9fNDkwLjU2X198MXwxOkE6MjV8X19TdHVkaW8gLSA0NTAgU3EgRnQsIFNsZWVwcyAyLUZyZWUgUGFya2luZ0ZyZWUgUGFya2luZyBSYXRlIFR5cGU6IFByZXBhaWQgRmFyZSBSZWZ1bmRhYmxlIEZhcmUxfDF8MTpBOjI1fA--",
+            "name": "Studio - 450 Sq Ft, Sleeps 2-Free Parking",
+            "description": "Free Parking Rate Type: Prepaid Fare Refundable Fare",
+            "quantity": 1,
+            "isPrepaid": true,
+            "guaranteeRequired": false,
+            "depositRequired": false,
+            "policies": [{
+                "description": "We understand that sometimes your travel plans change. We do not charge a change or cancel fee. However, this property (Hilton Grand Vacations Suites at the Flamingo) imposes the following penalty to its customers that we are required to pass on: Cancellations or changes made after 11:59 AM ((GMT-08:00) Pacific Time (US &amp; Canada); Tijuana) on Mar 2, 2016 are subject to a 100% Cost of Stay penalty. The property makes no refunds for no shows or early checkouts.",
+                "isQuantifiable": false,
+                "window": null,
+                "penalty": null,
+                "type": "Cancellation"
+            }, {
+                "description": "By proceeding with this reservation, you agree to all terms and conditions, which include the Cancellation Policy and all terms and conditions contained in the User Agreement.  You agree to pay the cost of your reservation. If you do not pay this debt and it is collected through the use of a collection agency, an attorney, or through other legal proceedings, you agree to pay all reasonable costs or fees, including attorney fees and court costs, incurred in connection with such collection effort.",
+                "isQuantifiable": false,
+                "window": null,
+                "penalty": null,
+                "type": "Disclaimer"
+            }, {
+                "description": "Total amount will be charged by the ean after the booking.",
+                "isQuantifiable": false,
+                "window": null,
+                "penalty": null,
+                "type": "Charging"
+            }, {
+                "description": "For HotelFees - ResortFee of 56 USD   will be collected at the hotel.",
+                "isQuantifiable": false,
+                "window": null,
+                "penalty": null,
+                "type": "Disclaimer"
+            }, {
+                "description": "Fees The following fees and deposits are charged by the property at time of service, check-in, or check-out. Fee for in-room wireless Internet: USD Resort per stay (rates may vary) Fee for wireless Internet in public areas: USD Included in Resort Fee per stay (rates may vary) Fee for high-speed Internet (wired) in public areas: USD Included in Resort Fee per stay (rates may vary) Valet parking fee: USD 10 per night (in/out privileges) The above list may not be comprehensive. Fees and deposits may not include tax and are subject to change. Mandatory Fees and Taxes You'll be asked to pay the following charges at the hotel: Resort fee: USD 28.00 per accommodation, per night We have included all charges provided to us by the property. However, charges can vary, for example, based on length of stay or the room you book.",
+                "isQuantifiable": false,
+                "window": null,
+                "penalty": null,
+                "type": "General"
+            }],
+            "fare": {
+                "type": "Negotiated",
+                "code": null,
+                "isRefundable": true,
+                "components": [{
+                    "money": {
+                        "amount": 438.0,
+                        "currency": "USD",
+                        "displayAmount": "$438.00",
+                        "type": "USD"
+                    },
+                    "components": [],
+                    "type": "BaseFare",
+                    "properties": []
+                }, {
+                    "money": {
+                        "amount": 52.56,
+                        "currency": "USD",
+                        "displayAmount": "$52.56",
+                        "type": "USD"
+                    },
+                    "components": [],
+                    "type": "Tax",
+                    "properties": [{
+                        "key": "Type",
+                        "value": null
+                    }, {
+                        "key": "Code",
+                        "value": null
+                    }, {
+                        "key": "Description",
+                        "value": "TaxAndServiceFee"
+                    }]
+                }, {
+                    "money": {
+                        "amount": 490.56,
+                        "currency": "USD",
+                        "displayAmount": "$490.56",
+                        "type": "USD"
+                    },
+                    "components": [],
+                    "type": "TotalFare",
+                    "properties": []
+                }, {
+                    "money": {
+                        "amount": 0.0,
+                        "currency": "USD",
+                        "displayAmount": "$0.00",
+                        "type": "USD"
+                    },
+                    "components": [],
+                    "type": "TotalFee",
+                    "properties": []
+                }, {
+                    "money": {
+                        "amount": 52.56,
+                        "currency": "USD",
+                        "displayAmount": "$52.56",
+                        "type": "USD"
+                    },
+                    "components": [],
+                    "type": "TotalTax",
+                    "properties": []
+                }, {
+                    "money": {
+                        "amount": 0.0,
+                        "currency": "USD",
+                        "displayAmount": "$0.00",
+                        "type": "USD"
+                    },
+                    "components": [],
+                    "type": "TotalDiscount",
+                    "properties": []
+                }],
+                "equivalents": null
+            },
+            "type": "271685",
+            "roomOccupancyTypes": ["|1|1:A:25|"],
+            "dailyRates": [{
+                "day": "Saturday",
+                "amount": 0.0,
+                "currency": null,
+                "displayAmount": " 0",
+                "type": null
+            }, {
+                "day": "Sunday",
+                "amount": 0.0,
+                "currency": null,
+                "displayAmount": " 0",
+                "type": null
+            }],
+            "inclusions": ["Free Parking"],
+            "isPreferred": false,
+            "deals": null,
+            "source": {
+                "inventoryId": "MjkxX18yNzE2ODVfXzkzNDUyMV9fNDkwLjU2X198MXwxOkE6MjV8X19TdHVkaW8gLSA0NTAgU3EgRnQsIFNsZWVwcyAyLUZyZWUgUGFya2luZ0ZyZWUgUGFya2luZyBSYXRlIFR5cGU6IFByZXBhaWQgRmFyZSBSZWZ1bmRhYmxlIEZhcmUxfDF8MTpBOjI1fA--",
+                "id": 291,
+                "name": "247ETH3"
+            },
+            "areExtraTaxesApplicable": false,
+            "numberOfAvailableRooms": 0
+        }, {
+            "id": "MjkxX18yNzE2ODVfXzkzNDUyMV9fNTE1LjJfX3wxfDE6QToyNXxfX1N0dWRpbyAtIDQ1MCBTcSBGdCwgU2xlZXBzIDItQ29udGluZW50YWwgQnJlYWtmYXN0Q29udGluZW50YWwgQnJlYWtmYXN0IFJhdGUgVHlwZTogUHJlcGFpZCBGYXJlIFJlZnVuZGFibGUgRmFyZTF8MXwxOkE6MjV8",
+            "name": "Studio - 450 Sq Ft, Sleeps 2-Continental Breakfast",
+            "description": "Continental Breakfast Rate Type: Prepaid Fare Refundable Fare",
+            "quantity": 1,
+            "isPrepaid": true,
+            "guaranteeRequired": false,
+            "depositRequired": false,
+            "policies": [{
+                "description": "We understand that sometimes your travel plans change. We do not charge a change or cancel fee. However, this property (Hilton Grand Vacations Suites at the Flamingo) imposes the following penalty to its customers that we are required to pass on: Cancellations or changes made after 11:59 AM ((GMT-08:00) Pacific Time (US &amp; Canada); Tijuana) on Mar 2, 2016 are subject to a 100% Cost of Stay penalty. The property makes no refunds for no shows or early checkouts.",
+                "isQuantifiable": false,
+                "window": null,
+                "penalty": null,
+                "type": "Cancellation"
+            }, {
+                "description": "By proceeding with this reservation, you agree to all terms and conditions, which include the Cancellation Policy and all terms and conditions contained in the User Agreement.  You agree to pay the cost of your reservation. If you do not pay this debt and it is collected through the use of a collection agency, an attorney, or through other legal proceedings, you agree to pay all reasonable costs or fees, including attorney fees and court costs, incurred in connection with such collection effort.",
+                "isQuantifiable": false,
+                "window": null,
+                "penalty": null,
+                "type": "Disclaimer"
+            }, {
+                "description": "Total amount will be charged by the ean after the booking.",
+                "isQuantifiable": false,
+                "window": null,
+                "penalty": null,
+                "type": "Charging"
+            }, {
+                "description": "For HotelFees - ResortFee of 56 USD   will be collected at the hotel.",
+                "isQuantifiable": false,
+                "window": null,
+                "penalty": null,
+                "type": "Disclaimer"
+            }, {
+                "description": "Fees The following fees and deposits are charged by the property at time of service, check-in, or check-out. Fee for in-room wireless Internet: USD Resort per stay (rates may vary) Fee for wireless Internet in public areas: USD Included in Resort Fee per stay (rates may vary) Fee for high-speed Internet (wired) in public areas: USD Included in Resort Fee per stay (rates may vary) Valet parking fee: USD 10 per night (in/out privileges) The above list may not be comprehensive. Fees and deposits may not include tax and are subject to change. Mandatory Fees and Taxes You'll be asked to pay the following charges at the hotel: Resort fee: USD 28.00 per accommodation, per night We have included all charges provided to us by the property. However, charges can vary, for example, based on length of stay or the room you book.",
+                "isQuantifiable": false,
+                "window": null,
+                "penalty": null,
+                "type": "General"
+            }],
+            "fare": {
+                "type": "Negotiated",
+                "code": null,
+                "isRefundable": true,
+                "components": [{
+                    "money": {
+                        "amount": 460.0,
+                        "currency": "USD",
+                        "displayAmount": "$460.00",
+                        "type": "USD"
+                    },
+                    "components": [],
+                    "type": "BaseFare",
+                    "properties": []
+                }, {
+                    "money": {
+                        "amount": 55.2,
+                        "currency": "USD",
+                        "displayAmount": "$55.20",
+                        "type": "USD"
+                    },
+                    "components": [],
+                    "type": "Tax",
+                    "properties": [{
+                        "key": "Type",
+                        "value": null
+                    }, {
+                        "key": "Code",
+                        "value": null
+                    }, {
+                        "key": "Description",
+                        "value": "TaxAndServiceFee"
+                    }]
+                }, {
+                    "money": {
+                        "amount": 515.2,
+                        "currency": "USD",
+                        "displayAmount": "$515.20",
+                        "type": "USD"
+                    },
+                    "components": [],
+                    "type": "TotalFare",
+                    "properties": []
+                }, {
+                    "money": {
+                        "amount": 0.0,
+                        "currency": "USD",
+                        "displayAmount": "$0.00",
+                        "type": "USD"
+                    },
+                    "components": [],
+                    "type": "TotalFee",
+                    "properties": []
+                }, {
+                    "money": {
+                        "amount": 55.2,
+                        "currency": "USD",
+                        "displayAmount": "$55.20",
+                        "type": "USD"
+                    },
+                    "components": [],
+                    "type": "TotalTax",
+                    "properties": []
+                }, {
+                    "money": {
+                        "amount": 0.0,
+                        "currency": "USD",
+                        "displayAmount": "$0.00",
+                        "type": "USD"
+                    },
+                    "components": [],
+                    "type": "TotalDiscount",
+                    "properties": []
+                }],
+                "equivalents": null
+            },
+            "type": "271685",
+            "roomOccupancyTypes": ["|1|1:A:25|"],
+            "dailyRates": [{
+                "day": "Saturday",
+                "amount": 0.0,
+                "currency": null,
+                "displayAmount": " 0",
+                "type": null
+            }, {
+                "day": "Sunday",
+                "amount": 0.0,
+                "currency": null,
+                "displayAmount": " 0",
+                "type": null
+            }],
+            "inclusions": ["Continental Breakfast"],
+            "isPreferred": false,
+            "deals": null,
+            "source": {
+                "inventoryId": "MjkxX18yNzE2ODVfXzkzNDUyMV9fNTE1LjJfX3wxfDE6QToyNXxfX1N0dWRpbyAtIDQ1MCBTcSBGdCwgU2xlZXBzIDItQ29udGluZW50YWwgQnJlYWtmYXN0Q29udGluZW50YWwgQnJlYWtmYXN0IFJhdGUgVHlwZTogUHJlcGFpZCBGYXJlIFJlZnVuZGFibGUgRmFyZTF8MXwxOkE6MjV8",
+                "id": 291,
+                "name": "247ETH3"
+            },
+            "areExtraTaxesApplicable": false,
+            "numberOfAvailableRooms": 0
+        }],
+        "brand": {
+            "code": "2513",
+            "name": "Hilton Grand Vacations",
+            "logo": null
+        },
+        "type": "Hotel",
+        "propertyId": "934521",
+        "moreRoomsAvailable": false,
+        "brandAvailablility": true,
+        "deal": {
+            "amount": {
+                "amount": 10.45,
+                "currency": "USD",
+                "displayAmount": "$10.45",
+                "type": "USD"
+            },
+            "name": "Book now and save!",
+            "description": null,
+            "duration": {
+                "start": {
+                    "date": "Sat, 05 Mar, 2016",
+                    "time": "12:00 AM",
+                    "systemDateTime": "2016-03-05T00:00:00"
+                },
+                "end": {
+                    "date": "Mon, 07 Mar, 2016",
+                    "time": "12:00 AM",
+                    "systemDateTime": "2016-03-07T00:00:00"
+                }
+            },
+            "type": "DiscountDeal"
+        },
+        "stayDuration": {
+            "start": {
+                "date": "Sat, 05 Mar, 2016",
+                "time": "12:00 AM",
+                "systemDateTime": "2016-03-05T00:00:00"
+            },
+            "end": {
+                "date": "Mon, 07 Mar, 2016",
+                "time": "12:00 AM",
+                "systemDateTime": "2016-03-07T00:00:00"
+            }
+        },
+        "isCancellable": true,
+        "allPassengersInfoRequired": false,
+        "isGuaranteeRequired": true,
+        "id": "934521",
+        "name": "Hilton Grand Vacations Suites at the Flamingo",
+        "fare": {
+            "type": null,
+            "code": null,
+            "isRefundable": false,
+            "components": [{
+                "money": {
+                    "amount": 1336.0,
+                    "currency": "USD",
+                    "displayAmount": "$1,336.00",
+                    "type": "USD"
+                },
+                "components": [],
+                "type": "BaseFare",
+                "properties": []
+            }, {
+                "money": {
+                    "amount": 1483.36,
+                    "currency": "USD",
+                    "displayAmount": "$1,483.36",
+                    "type": "USD"
+                },
+                "components": [],
+                "type": "TotalFare",
+                "properties": []
+            }, {
+                "money": {
+                    "amount": 0.0,
+                    "currency": "USD",
+                    "displayAmount": "$0.00",
+                    "type": "USD"
+                },
+                "components": [],
+                "type": "TotalFee",
+                "properties": []
+            }, {
+                "money": {
+                    "amount": 157.81,
+                    "currency": "USD",
+                    "displayAmount": "$157.81",
+                    "type": "USD"
+                },
+                "components": [],
+                "type": "TotalTax",
+                "properties": []
+            }, {
+                "money": {
+                    "amount": 10.45,
+                    "currency": "USD",
+                    "displayAmount": "$10.45",
+                    "type": "USD"
+                },
+                "components": [],
+                "type": "TotalDiscount",
+                "properties": []
+            }],
+            "equivalents": null
+        },
+        "fareWithAddOns": {
+            "type": null,
+            "code": null,
+            "isRefundable": false,
+            "components": [{
+                "money": {
+                    "amount": 1336.0,
+                    "currency": "USD",
+                    "displayAmount": "$1,336.00",
+                    "type": "USD"
+                },
+                "components": [],
+                "type": "BaseFare",
+                "properties": []
+            }, {
+                "money": {
+                    "amount": 1483.36,
+                    "currency": "USD",
+                    "displayAmount": "$1,483.36",
+                    "type": "USD"
+                },
+                "components": [],
+                "type": "TotalFare",
+                "properties": []
+            }, {
+                "money": {
+                    "amount": 0.0,
+                    "currency": "USD",
+                    "displayAmount": "$0.00",
+                    "type": "USD"
+                },
+                "components": [],
+                "type": "TotalFee",
+                "properties": []
+            }, {
+                "money": {
+                    "amount": 157.81,
+                    "currency": "USD",
+                    "displayAmount": "$157.81",
+                    "type": "USD"
+                },
+                "components": [],
+                "type": "TotalTax",
+                "properties": []
+            }, {
+                "money": {
+                    "amount": 10.45,
+                    "currency": "USD",
+                    "displayAmount": "$10.45",
+                    "type": "USD"
+                },
+                "components": [],
+                "type": "TotalDiscount",
+                "properties": []
+            }],
+            "equivalents": null
+        },
+        "isPostPaid": false,
+        "isSoldOut": false,
+        "isPreferred": false,
+        "addOns": null,
+        "preferredSortOrder": 0,
+        "source": {
+            "inventoryId": "934521",
+            "id": 291,
+            "name": "247ETH3"
+        },
+        "restrictions": null
+    },
+    "roomOccupancyTypes": [{
+        "passengerTypeQuantities": [{
+            "quantity": 1,
+            "type": "Adult",
+            "ages": [25]
+        }],
+        "code": "|1|1:A:25|"
+    }],
+    "searchId": "a51210cb-768c-43ae-8349-5f77375df224",
+    "status": {
+        "isSuccessful": true,
+        "code": 200,
+        "message": "Successful",
+        "referenceId": "c119b442-88f5-49a2-920f-1a193c76587e",
+        "additionalMessages": []
+    }
+}

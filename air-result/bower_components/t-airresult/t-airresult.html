@@ -1,0 +1,321 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../iron-flex-layout/classes/iron-flex-layout.html">
+<link rel="import" href="../iron-icons/maps-icons.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../paper-spinner/paper-spinner.html">
+
+<!--
+  `<t-autosuggest>` is a ajax driven autosuggestion component. 
+
+
+    <t-autosuggest data-url="http://localhost:3000/components/formComponents/t-autosuggest/data.json">
+    </t-autosuggest>   
+-->
+
+<dom-module id="t-airresult">
+<style is="custom-style">
+ :host{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    position: relative;
+  }
+
+.sorting .price-note {
+  padding: 10px 12px;
+  font-size: 12px;
+  line-height: 16px;
+  color: rgba(51, 51, 51, 0.6);
+  border-bottom: 1px solid rgba(114, 125, 130, 0.4);
+}
+
+  .margin-vertical{
+    margin: 10px 0;
+  }
+
+  .rotate90{
+    transform:rotate(90deg);
+  }
+
+  .rotate-neg90{
+    transform: rotate(-90deg);
+  }
+
+  .sorting .sorting-btn{
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid rgba(114, 125, 130, 0.4);
+    background: #f2f2f2;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+.sorting-btn .params a {
+    /* display: block; */
+  padding: 10px 0;
+  font-size: 16px;
+  text-decoration: none;
+  color: rgba(51, 51, 51, 0.6);
+  width: 100%;
+  position: relative;
+  text-align: center;
+  border-right:1px solid rgba(114, 125, 130, 0.4);
+}
+.sorting-btn .params:last-child  a{
+  border-right:0;
+}
+
+.sorting-btn .params a iron-icon{
+  transition: 0.3s all ease;
+  transform: rotate(90deg);
+  /* position: absolute; */
+  display: none;
+  width: 17px;
+  height: 17px;
+  /* margin-left: 5px; */
+  /* top: 50%; */
+  margin-top: -5px;
+}
+.sorting-btn .params a.active iron-icon{
+  display: inline-flex;
+}
+
+.sorting-btn .params a.active.desc iron-icon{
+  transform:rotate(-90deg);
+}
+
+.sorting-btn .params a.active {
+  color: #000000;
+  background: #ffffff;
+}
+  .itinerary{
+    border-bottom:1px solid rgba(114, 125, 130, 0.4);
+    padding: 10px;
+    color:#727d82;
+  }
+  .itinerary img,.itinerary iron-icon {
+    margin-right: 5px;
+  }
+  .itinerary .air-detail{
+    margin-bottom: 5px;
+  }
+  .itinerary .amount {
+  font-size: 20px;
+  color: #fd7117;
+}
+  .media-body h4{
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #000000;
+  }
+
+  .spinner{
+    height:100px;
+  }
+  
+  .overlay-spinner{
+    background: rgba(0,0,0, 0.3);
+    position: fixed;
+    z-index: 99999;
+  }
+
+</style>
+  
+<template>
+
+ <paper-header-panel mode="waterfall">
+  
+ <div class="sorting paper-header">
+ <div hidden$="{{!spinnerState}}" class="overlay-spinner horizontal fit center center-justified layout">
+    <paper-spinner class="" id="spinner" active></paper-spinner>
+    
+  </div>
+  <div class=" layout horizontal sorting-btn">
+    <div class=" params flex center center-justified horizontal layout">
+      <a id="price" class="active"  on-click="_sortOn">Price <iron-icon icon="arrow-back" ></iron-icon></a>
+    </div>
+    <div class="params flex center center-justified horizontal layout">
+      <a id="stops" on-click="_sortOn">Stops <iron-icon icon="arrow-back"></iron-icon></a>
+    </div>
+    <div class="params flex center center-justified horizontal layout">
+      <a id="duration" on-click="_sortOn">Duration <iron-icon icon="arrow-back"></iron-icon></a>
+    </div>
+  </div>
+
+  <div class="price-note">
+    Note : Prices does not include baggage and other fees charged by the airlines.
+  </div>
+
+  
+ 
+ </div>
+ <div class="content">
+   <template is="dom-repeat" items="{{inventories}}" as="inventory">
+     <div class="itinerary layout vertical">
+          <div class="air-detail horizontal center layout">
+              <div class="flex">
+                  <div class="media center layout horizontal">
+                      <div class="media-left">
+                          <img class="media-object" alt="{{inventory.legs.0.segments.0.airline.name}}" src="{{inventory.legs.0.segments.0.airline.imageUrl}}">
+                      </div>
+                      <div class="media-body flex">
+                          <h4 class="media-heading">{{inventory.legs.0.airline.name}}</h4>
+                      </div>
+                  </div>
+              </div>
+              <div >
+                  <span class="amount">{{_getDisplayAmount(inventory.minFare.fare)}}</span>
+              </div>
+          </div>
+          
+          <div class="air-schedule  layout vertical">
+            <div class="horizontal layout">
+              <div class="flex ">
+                
+                <span class="air-icon-wrap">
+                    <iron-icon class="rotate90" icon="maps:flight"></iron-icon>
+                </span>
+
+                <span class="fl-info-date">{{_getTimings(inventory.legs.0.departureTime.time, inventory.legs.0.arrivalTime.time)}}</span>
+              </div>
+                <span class="fl-info-det">{{_getFlightJourneyDetails(inventory.legs.0.totalJourneyDuration, inventory.legs.0.noOfStops, inventory.legs.0.cabinType)}}</span>
+            </div>
+            
+            <template is="dom-if" if="{{_returnJourneyPresent(inventory.legs)}}">
+              
+          <div class="horizontal layout">
+              <div class="flex ">
+                
+                <span class="air-icon-wrap">
+                    <iron-icon class="rotate-neg90" icon="maps:flight"></iron-icon>
+                </span>
+
+                <span class="fl-info-date">{{_getTimings(inventory.legs.1.departureTime.time, inventory.legs.1.arrivalTime.time)}}</span>
+              </div>
+                <span class="fl-info-det">{{_getFlightJourneyDetails(inventory.legs.1.totalJourneyDuration, inventory.legs.1.noOfStops, inventory.legs.1.cabinType)}}</span>
+            </div>
+            </template>
+          </div> 
+        <!-- </a>  -->
+    </div>
+   </template> 
+  </div>
+
+ </paper-header-panel> 
+
+</template>
+
+</dom-module>
+
+<script>
+  Polymer({
+
+    is: 't-airresult',
+
+    properties:{
+      
+      /**
+       * State of the spinner to stop on time
+       */
+      spinnerState:{
+        type:Boolean,
+        value:true
+      },
+
+      /**
+       * The response objec as array
+       */
+      inventories:{
+        type:Array,
+        value:function(){
+          return [];
+        },
+        notify:true,
+        observer:'_onInventoryChange'
+      }
+    },
+
+    _getTimings: function(departureTime, arrivalTime){
+      return departureTime +" - "+ arrivalTime;
+    },
+
+    _getFlightJourneyDetails: function(totalJourneyDuration, noOfStops, cabinType){
+      return this._getFormattedDuration(totalJourneyDuration)+ " | "+ noOfStops +" stops | "+ cabinType;
+    },
+
+    _getFormattedDuration: function(delta){
+
+      // calculate (and subtract) whole days
+      var days = Math.floor(delta / 1440);
+      delta -= days * 1440;
+
+      // calculate (and subtract) whole hours
+      var hours = Math.floor(delta / 60);
+      delta -= hours * 60;
+
+      // calculate (and subtract) whole minutes
+      var minutes = delta;
+
+      var formattedDuration= '';
+      if(days > 0)
+        formattedDuration = days +'d '+hours+'h ';
+      else
+        formattedDuration = hours+'h ';
+
+      if(minutes > 0)
+        formattedDuration= formattedDuration + minutes + 'm';
+
+      return formattedDuration;
+    },
+
+    _getDisplayAmount: function(fare){
+      return fare.displayAmount;
+    },
+
+    _returnJourneyPresent:function(legs){
+      return legs.length>1;
+    },
+
+    _onInventoryChange: function(){
+
+      if(this.inventories!= undefined && this.inventories.length>0)
+        this.spinnerState=false;
+    },
+
+    _sortOn: function(e){
+     
+      this.spinnerState=true;
+      var sortElement= e.srcElement;
+      var isAscending= true;
+      if(sortElement.className.search("active") >=0 )
+      {
+        if(sortElement.className.search("desc") >=0)
+        {
+          isAscending= true;
+          sortElement.classList.remove("desc");
+        }
+        else
+        {
+          isAscending= false;
+          sortElement.classList.add("desc");
+        }
+      }
+      else{
+        this.$.price.classList.remove("active");
+        this.$.stops.classList.remove("active");
+        this.$.duration.classList.remove("active");
+        sortElement.classList.add("active");
+        isAscending= true;
+      }
+
+      this.fire('on-sort',{
+        param: sortElement.id,
+        isAscending: isAscending
+      }); 
+    }
+ 
+  })
+</script>

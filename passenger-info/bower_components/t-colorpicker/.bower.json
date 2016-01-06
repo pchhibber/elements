@@ -1,0 +1,47 @@
+{
+  "name": "t-colorpicker",
+  "version": "0.0.0",
+  "authors": [
+    "Rahul Pilkhwal <rahul.pilkhwal@tavisca.com>",
+    "Shailesh Kumar Srivastava <ssrivastava@tavisca.com>",
+    "Sounak Pal <spal@tavisca.com>",
+    "Ajinkya Tejankar <tejankarajinkya@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "Polymer",
+    "Web",
+    "Components"
+  ],
+  "homepage": "https://github.com/atomelements/t-colorpicker",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "iron-icons": "PolymerElements/iron-icons#1.0.3",
+    "iron-input": "PolymerElements/iron-input#1.0.6",
+    "paper-material": "PolymerElements/paper-material#1.0.2",
+    "t-shared-components": "atomelements/t-shared-components#0.0.0",
+    "polymer": "Polymer/polymer#^1.0.0"
+  },
+  "devDependencies": {
+    "webcomponentsjs": "~0.7.14",
+    "iron-component-page": "PolymerElements/iron-component-page#~1.0.6"
+  },
+  "_release": "0.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.0",
+    "commit": "d7eb4056f34a55e516368c1354a4f7fb41c14f56"
+  },
+  "_source": "git://github.com/atomelements/t-colorpicker.git",
+  "_target": "0.0.0",
+  "_originalSource": "atomelements/t-colorpicker"
+}

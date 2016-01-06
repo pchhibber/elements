@@ -1,0 +1,32 @@
+{
+    "name": "Autosuggest",
+    "properties": [{
+        "name": "Data",
+        "fields": {
+            "label": {
+                "name": "Label",
+                "type": "string",
+                "value": "Untitled Autosuggest"
+            },
+            "dataUrl": {
+                "name": "Autosuggest Api",
+                "type": "string",
+                "value": "http://atom-project.io/demo/api/air/suggestions"
+            },
+            "tokenParam": {
+                "name": "Token parameter",
+                "type": "string",
+                "value": "formattedAddress"
+            }
+        }
+    }, {
+        "name": "Properties",
+        "fields": {
+            "required": {
+                "name": "Mandatory Field",
+                "type": "Boolean",
+                "value": true
+            }
+        }
+    }]
+}

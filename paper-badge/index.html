@@ -1,0 +1,429 @@
+<!doctype html>
+<html>
+<head>
+
+    <title>Atom</title>
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+<link rel="shortcut icon" href="/elements/favicon.ico" />
+
+<script src="/elements/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+<link rel="stylesheet" href="/elements/styles/custom.css" media="all" async type="text/css">
+<link rel="import" href="/elements/components/elements.html">
+<!--[if lt IE 10 ]>
+    <script type='text/javascript'>
+        alert( 'Your IE is Old' );
+
+        // or set a flag or something
+
+        var oldIE = true;
+    </script>
+<![endif]-->
+
+
+</head>
+<body class="layout horizontal center center-justified">
+
+    <div class="overlay"></div>
+
+    <t-scaffold id="scaff" scaffold-type="atom">
+        <nav-toolbar>
+            <div class="product-logo" >
+                <a href="/elements/">
+                    <img src="/elements/assets/logos/atom-grey.png" id="prod_brand" />
+                </a>
+            </div>
+        </nav-toolbar>
+
+        <header-toolbar style="width:100%">
+            <div class="horizontal layout center">
+                
+                    <span id="selectedComponent">Paper Badge</span>
+                    
+                        <a class="buildStatus" href="https://travis-ci.org/PolymerElements/paper-badge/">
+                            <img src="https://travis-ci.org/PolymerElements/paper-badge.svg?branch=master" alt="Build Status">
+                        </a>
+                    
+                
+                <span class="flex"></span>
+                <span class="badge-alpha-testing">Alpha</span>
+            </div>
+        </header-toolbar>
+
+        <nav-content>
+            <t-menu>
+                <t-item onClick="redirect('/elements/about')" label="About"></t-item>
+                <t-submenu aria-selected class="iron-selected" label="Elements" >
+                    
+                        <t-submenu
+                            label="Flights"
+                            >
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Passenger Info"
+                                    data-component="t-passenger-info"
+                                    onclick="redirect('/elements/passenger-info/')"
+                                    data-category="flights"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Result Item"
+                                    data-component="t-result-item"
+                                    onclick="redirect('/elements/result-item/')"
+                                    data-category="flights"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Star Rating"
+                                    data-component="t-starrating"
+                                    onclick="redirect('/elements/star-rating/')"
+                                    data-category="flights"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Itinerary"
+                                    data-component="t-itinerary"
+                                    onclick="redirect('/elements/itinerary/')"
+                                    data-category="flights"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Credit Card"
+                                    data-component="t-creditcard"
+                                    onclick="redirect('/elements/credit-card/')"
+                                    data-category="flights"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Insurance"
+                                    data-component="t-insurance"
+                                    onclick="redirect('/elements/insurance/')"
+                                    data-category="flights"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Badge"
+                                    data-component="t-badge"
+                                    onclick="redirect('/elements/badge/')"
+                                    data-category="flights"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Search"
+                                    data-component="t-search"
+                                    onclick="redirect('/elements/search/')"
+                                    data-category="flights"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Passenger Detail"
+                                    data-component="t-passenger-detail"
+                                    onclick="redirect('/elements/passenger-detail/')"
+                                    data-category="flights"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Mystique Auth"
+                                    data-component="t-mystique-auth"
+                                    onclick="redirect('/elements/mystique-auth/')"
+                                    data-category="flights"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Home Header"
+                                    data-component="t-home-header"
+                                    onclick="redirect('/elements/home-header/')"
+                                    data-category="flights"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="App Footer"
+                                    data-component="t-app-footer"
+                                    onclick="redirect('/elements/app-footer/')"
+                                    data-category="flights"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Air Result"
+                                    data-component="t-airresult"
+                                    onclick="redirect('/elements/air-result/')"
+                                    data-category="flights"
+                                    >
+                                </t-item>
+                            
+                        </t-submenu>
+                    
+                        <t-submenu
+                            label="Hotels"
+                            >
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Hotel Search"
+                                    data-component="t-hotel-search"
+                                    onclick="redirect('/elements/hotel-search/')"
+                                    data-category="hotels"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Room List"
+                                    data-component="t-hotel-room-list"
+                                    onclick="redirect('/elements/room-list/')"
+                                    data-category="hotels"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Fare Details"
+                                    data-component="t-faredetails"
+                                    onclick="redirect('/elements/fare-details/')"
+                                    data-category="hotels"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Search Overlay"
+                                    data-component="t-search-overlay"
+                                    onclick="redirect('/elements/search-overlay/')"
+                                    data-category="hotels"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Header"
+                                    data-component="t-header"
+                                    onclick="redirect('/elements/header/')"
+                                    data-category="hotels"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Address"
+                                    data-component="t-address"
+                                    onclick="redirect('/elements/address/')"
+                                    data-category="hotels"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Map Nearby Search"
+                                    data-component="t-map-nearby-search"
+                                    onclick="redirect('/elements/map-nearby-search/')"
+                                    data-category="hotels"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Text Container"
+                                    data-component="t-text-container"
+                                    onclick="redirect('/elements/text-container/')"
+                                    data-category="hotels"
+                                    >
+                                </t-item>
+                            
+                        </t-submenu>
+                    
+                        <t-submenu
+                            label="Google Components"
+                             aria-selected >
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Paper Badge"
+                                    data-component="paper-badge"
+                                    onclick="redirect('/elements/paper-badge/')"
+                                    data-category="googlecomponents"
+                                     aria-selected >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Paper Dialog"
+                                    data-component="paper-dialog"
+                                    onclick="redirect('/elements/paper-dialog/')"
+                                    data-category="googlecomponents"
+                                    >
+                                </t-item>
+                            
+                                <t-item
+                                    class="component-link"
+                                    label="Paper Icon Button"
+                                    data-component="paper-icon-button"
+                                    onclick="redirect('/elements/paper-icon-button/')"
+                                    data-category="googlecomponents"
+                                    >
+                                </t-item>
+                            
+                        </t-submenu>
+                    
+
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            <t-item
+                                class="component-link"
+                                label="Demo Tester"
+                                data-component="demo-tester"
+                                onclick="redirect('/elements/demo-tester/')"
+                                >
+                            </t-item>
+                        
+                    
+                </t-submenu>
+                <t-item onClick="redirect('/elements/settings')" label="Settings"></t-item>
+            </t-menu>
+        </nav-content>
+
+        <build-status element-ids-file-path="/elements/element-ids.json"></build-status>
+
+        
+<div id="elementContent" class="content layout vertical fit content-component">
+    <div id="tabBar" class="layout horizontal center-justified">
+        <paper-tabs noink selected="2">
+            <paper-tab>Design Considerations</paper-tab>
+            <paper-tab>Dev Zone</paper-tab>
+            <paper-tab>Demo</paper-tab>
+        </paper-tabs>
+    </div>
+    <iron-pages selected="2" class="flex" style="position:relative">
+        <div class="fit designTabWrapper">
+            <div class="designTab">
+                <marked-element>
+                    <div class="markdown-html"></div>
+                    <script type="text/markdown">
+						
+
+                    </script>
+                </marked-element>
+            </div>
+        </div>
+        <div class="fit">
+            <iframe id="idIframe" src="/elements/paper-badge/bower_components/paper-badge/" width="100%"></iframe>
+        </div>
+        <div class="fit">
+            <t-demo-atom
+                demo-file="/elements/paper-badge/bower_components/paper-badge/demo/index.html"
+                properties-file="/elements/paper-badge/bower_components/paper-badge/property.json"
+                component-name="paper-badge"
+                org-name="PolymerElements">
+                <template></template>
+            </t-demo-atom>
+        </div>
+    </iron-pages>
+</div>
+
+<script type="text/javascript">
+    (function() {
+        var pages = document.querySelector('iron-pages');
+        var tabs = document.querySelector('paper-tabs');
+        
+        tabs.addEventListener('iron-select', function () {
+            pages.selected = tabs.selected;
+        });
+    })(); 
+</script>
+
+    </t-scaffold>
+
+    <script>
+        window.addEventListener('WebComponentsReady', function (e) {
+            var overlay = document.querySelector('.overlay');
+
+            if (overlay) {
+                overlay.style.display = 'none';
+            }
+        });
+
+        //this is __BAD__, first of all it shouldn't be global function
+        //second if this function doesn't do much apart from simple plain
+        //redirection then it should be handled using anchor tags
+        function redirect(url) {
+            window.location = url;
+        }
+    </script>
+</body>
+</html>

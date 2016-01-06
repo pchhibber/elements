@@ -1,0 +1,62 @@
+
+<script>
+    TravelNxt = window.TravelNxt || {};
+    TravelNxt.Behaviors = TravelNxt.Behaviors || {};
+    TravelNxt.Behaviors.FareBehavior = {
+        properties: {
+            /*Fare components from API*/
+            _components: {
+                type: Array,
+                value: function() {
+                    return [];
+                }
+            },
+
+            _totalFare: {
+                type: Object,
+                notify: false,
+                computed: '_computeFare(_components, "totalFare")'
+            },
+
+            _discount: {
+                type: Object,
+                notify: false,
+                computed: '_computeFare(_components, "totaldiscount")'
+            },
+
+            _totalFareWithOutDiscount: {
+                type: Object,
+                notify: false,
+                computed: '_computeFareWithOutDiscount(_totalFare, _discount)'
+            },
+        },
+
+        _computeFare: function(components, type){
+            if(components){
+                for (var i = 0; i < components.length; i++) {
+                    var comp = components[i];
+                    if(comp.type.toLowerCase() == type.toLowerCase())
+                        return comp;
+                };
+            }
+            return null;
+        },     
+        _computeFareWithOutDiscount: function(_totalFare, _discount){
+            if(!_totalFare)
+                return null;
+
+            var fare = {
+                    money: {
+                        amount: _totalFare.money.amount,
+                        currency: _totalFare.money.currency,
+                        displayAmount: ''  //set formatted value after intergating globalization
+                    }
+                };
+
+            if(_discount){
+                fare.money.amount += _discount.money.amount;
+            }
+            return fare;
+        }
+    };
+</script>

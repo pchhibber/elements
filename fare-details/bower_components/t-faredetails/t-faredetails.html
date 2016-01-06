@@ -1,0 +1,251 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-flex-layout/classes/iron-flex-layout.html">
+<link rel="import" href="../t-section-header/t-section-header.html">
+<link rel="import" href="../t-loader/t-loader.html">
+
+<dom-module id="t-faredetails">
+    <template>
+        <style>
+            :host {
+                display: block;
+                font-family: var(--header-font-family, --primary-font-family);
+                color: var(--dark-color-1, #434a54);
+                font-size: var(--font-size-medium, 14px);
+            }
+
+            t-section-header {
+                margin-bottom: 0;
+            }
+
+            .section {
+                padding: 0 10px;
+            }
+
+            .loader-section {
+                padding:10px;
+            }
+
+            .item {
+                padding: 10px 0;
+                border-bottom: 1px solid;
+                border-color: var(--grey-two,#eee);
+            }
+
+            .discount {
+                -webkit-order: 97;
+                -moz-order: 97;
+                -ms-order: 97;
+                -o-order: 97;
+                order: 97;
+            }
+
+            .insurance {
+                -webkit-order: 98;
+                -moz-order: 98;
+                -ms-order: 98;
+                -o-order: 98;
+                order: 98;
+            }
+            .bestPriceGuarantee {
+                -webkit-order: 99;
+                -moz-order: 99;
+                -ms-order: 99;
+                -o-order: 99;
+                order: 99;
+            }
+            .total {
+                font-size: 18px;
+                color: var(--dark-color, #111);
+                padding: 10px 0;
+                -webkit-order: 100;
+                -moz-order: 100;
+                -ms-order: 100;
+                -o-order: 100;
+                order: 100;
+            }
+        </style>
+        <t-section-header label="[[label]]" secondary-label="[[_getPassenger(passengerDetails)]]"></t-section-header>
+
+        <t-notify active="[[error]]" message="Sorry we are having difficulties confirming the availability and price of your selected itinerary. Please go back and select another."  type="error" ></t-notify>
+        <div class="loader-section"  id="loaderContainer">
+            <div class="layout horizontal center-justified" >
+                <t-loader id="loader" active></t-loader>
+            </div>
+            <p>Please wait, we are rechecking availability and price of your selected itinerary.</p>
+        </div>
+        <div class="layout vertical section">
+            <template is="dom-repeat" items="[[data]]">
+                <template is="dom-if" if="[[_isTypeMatching(item,'BaseFare')]]">
+                    <div class="layout horizontal item baseFare">
+                        <span>Base Fare</span>
+                        <span class="flex"></span>
+                        <span>[[_getDisplayAmount(item.money)]]</span>
+                    </div>
+                </template>
+                
+                <template is="dom-if" if="[[_isTypeMatching(item,'Discount')]]">
+                    <template is="dom-if" if="[[item.money.amount]]">
+                        <div class="layout horizontal item discount">
+                            <span>Discount</span>
+                            <span class="flex"></span>
+                            <span>[[_getDisplayAmount(item.money)]]</span>
+                        </div>
+                    </template>
+                </template>
+                <template is="dom-if" if="[[_isTypeMatching(item,'Insurance')]]">
+                    <div class="layout horizontal item insurance">
+                        <span>Insurance</span>
+                        <span class="flex"></span>
+                         <span>[[_getDisplayAmount(item.money)]]</span>
+                    </div>
+                </template>
+                <template is="dom-if" if="[[_isTypeMatching(item,'BestPriceGuarantee')]]">
+                    <div class="layout horizontal item bestPriceGuarantee">
+                        <span>Best Price Guarantee</span>
+                        <span class="flex"></span>
+                         <span>[[_getDisplayAmount(item.money)]]</span>
+                    </div>
+                </template>
+                <template is="dom-if" if="[[_isTypeMatching(item,'TotalFare')]]">
+                    <div class="layout horizontal total">
+                        <span>Total Fare</span>
+                        <span class="flex"></span>
+                        <span>[[_getDisplayAmount(item.money)]]</span>
+                    </div>
+                </template>
+            </template>
+            <div class="layout horizontal taxes item" id="taxes" hidden>
+                <span>Taxes and Fees</span>
+                <span class="flex"></span>
+                <span>[[taxesFees]]</span>
+            </div>
+        </div>
+    </template>
+</dom-module>
+<script>
+    Polymer({
+
+        is: 't-faredetails',
+
+        properties: {
+
+            error:{
+                type:Boolean,
+                value:false,
+                observer:'_onError'
+            },
+
+            data: {
+                type: Array,
+                value: function () { return [] },
+                notify: true,
+                observer: '_onDataChanged'
+            },
+
+            label: {
+                type: String,
+                reflectToAttribute: true,
+                value: 'Fare Details'
+            },
+
+            taxesFees: {
+                type: String,
+                value: ''
+            },
+
+            passengerDetails:{
+                type:Array,
+                notify:true
+            },
+
+            totalFare:{
+                type:Object,
+                value:null
+            },
+
+            _insurance:{
+                type:Object
+            }
+
+        },
+
+        _onError:function(){
+            if(this.error){
+                this.$.loader.active = false;
+                this.$.loader.hidden = true;
+                this.$.loaderContainer.hidden = true;
+                this.$.taxes.hidden = true;
+            }
+        },
+
+        _getPassenger: function (quantity, type) {
+            var passengerInfo = "";
+            var passengerDetails = this.passengerDetails;
+            passengerDetails.forEach(function(passenger,index){
+                switch(passenger.type) {
+                    case 'Child':
+                        if (passenger.quantity == 0 || passenger.quantity > 1)
+                            passengerInfo =  passengerInfo + passenger.quantity + " Children"  ;
+                        else
+                                passengerInfo =  passengerInfo + passenger.quantity + " " + passenger.type ;
+                        break;
+                    default:
+                        if (passenger.quantity == 0 || passenger.quantity > 1)
+                            passengerInfo =    passengerInfo+ passenger.quantity + " " +passenger.type +"s";
+                        else
+                            passengerInfo =    passengerInfo + passenger.quantity + " " + passenger.type ;
+                }
+                if(index != passengerDetails.length -1)
+                    passengerInfo   =passengerInfo  + ", ";
+            });
+            return passengerInfo;    
+        },
+
+        _getDisplayAmount: function(money){
+            var newAmount = parseFloat(Math.round(money.amount * 100) / 100).toFixed(2);
+            return money.currency + " " + newAmount;
+        },
+
+        _getTaxes:function(){
+            if (this.data != undefined && this.data.length > 0) {
+                //console.log(this.data)
+                var computedAmount = this.data.filter(function(el){
+                    return el.type == "TotalTax" ||
+                           el.type == "TotalFee";
+                }).reduce(function(total,obj){
+                    return total + obj.money.amount;
+                }, 0);
+                this.taxesFees = this.data[0].money.currency + " " + parseFloat(Math.round(computedAmount * 100) / 100).toFixed(2);
+            }
+        },
+
+        _isTypeMatching: function (a, b) {
+            if(a.type == 'TotalFare')
+                this.totalFare = a;
+            if(a.type == 'Insurance')
+                this._insurance = a;
+            if(a.type == 'Discount' && a.properties){
+                var isIgnoreType = false;
+                for (var i = 0; i < a.properties.length; i++) {
+                    if(a.properties[i].key.toLowerCase() == 'type' && a.properties[i].value.toLowerCase() == 'supplier'){
+                        isIgnoreType = true;
+                    }
+                };
+                if(isIgnoreType){
+                    return false;
+                }
+            }
+            return a.type == b;
+        },
+
+        _onDataChanged: function () {
+            if (this.data != undefined && this.data.length > 0) {
+                this.$.loader.active = false;
+                this.$.loader.hidden = true;
+                this.$.loaderContainer.hidden = true;
+                this._getTaxes();
+                this.$.taxes.hidden = false;
+            }
+        }
+    });
+</script>

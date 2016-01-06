@@ -1,0 +1,230 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-flex-layout/classes/iron-flex-layout.html">
+<link rel="import" href="../iron-dropdown/iron-dropdown-scroll-manager.html">
+<link rel="import" href="../iron-icons/maps-icons.html">
+<link rel="import" href="../iron-icons/social-icons.html">
+ 
+<dom-module id="t-search-overlay">
+    <template>
+        <style>
+        :host([hide]) {
+            -ms-transform: scale(0);
+            /* IE 9 */
+            -webkit-transform: scale(0);
+            /* Safari */
+            transition: 1s ease all;
+            transform: scale(0);
+        }
+        
+        :host {
+            display: block;
+            text-align: center;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            font-family: var(--header-font-family, --primary-font-family);
+            color: var(--light-color, #fff);
+            background: var(--app-header-bg, #0e5398);
+            z-index: 9;
+        }
+        
+        .overlay {
+            height: 100%;
+        }
+        
+        iron-icon {
+            width: 100px;
+            height: 100px;
+            color:  var(--light-color, #fff);
+            border-radius: 50%;
+            padding: 10px;
+        }
+        
+        .animated {
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+            -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            -webkit-animation-iteration-count: infinite;
+        }
+        
+        @-webkit-keyframes pulse {
+            0% {
+                -webkit-transform: scale(1);
+            }
+            50% {
+                -webkit-transform: scale(1.1);
+            }
+            100% {
+                -webkit-transform: scale(1);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .pulse {
+            -webkit-animation-name: pulse;
+            animation-name: pulse;
+        }
+        
+        .content-area {
+            margin-top: 15px;
+        }
+        
+        .content-area::content h6 {
+            text-align: center;
+            display: inline!important;
+        }
+        
+        .progress {
+            margin: 0;
+            padding: 2px;
+            height: 26px;
+            border: 3px solid #ffffff;
+            border-radius: 12px;
+            background: transparent;
+            box-shadow: none;
+            width: 90vw;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .progressText{
+            font-size: 11px;
+            line-height: 16px;
+            position: absolute;
+            left: 50%;
+            transform:translateX(-50%);
+        }
+        #progressBar {
+            height: 16px;
+            border-radius: 12px;
+            background: var(--search-overlay-progress,#5d9cec);
+            box-shadow: none;
+            vertical-align: middle;
+            transition: 0.3s ease width;
+        }
+        
+        .loading-btm-text {
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 300;
+            color: #5d9cec;
+            text-align: center;
+            margin-top: 5px;
+        }
+        
+        .footer-area {
+            padding: 15px 0 30px;
+        }
+        
+        .footer-area::content img {
+            width: 120px;
+        }
+        </style>
+        <div class="layout vertical overlay">
+            <div class="flex horizontal layout center center-justified">
+                <div class="layout vertical ">
+                    <div id="animated-example" class="animated pulse">
+                        <iron-icon icon="{{icon}}"></iron-icon>
+                    </div>
+                    <div class="content-area">
+                        <content select=".data"></content>
+                    </div>
+                    <div class="progress">
+                        <span class="progressText"><span>{{value}}</span>%</span>
+                        <div id="progressBar">
+                        </div>
+                    </div>
+                    <!-- <div class="loading-btm-text">
+                        Please wait .... Loading results
+                        Checking availability and price for your selected itinerary...
+                    </div> -->
+                </div>
+            </div>
+            <div class="layout horizontal center center-justified footer-area">
+                <content select=".footer"></content>
+            </div>
+        </div>
+    </template>
+</dom-module>
+<script>
+Polymer({
+
+    is: 't-search-overlay',
+
+    properties: {
+
+
+        icon: {
+            type: String,
+            reflectToAttribute: true,
+            value: 'maps:flight'
+        },
+
+        value: {
+            type: Number,
+            reflectToAttribute: true,
+            value: 0,
+            observer: '_progressAnimation'
+        },
+
+        hide: {
+            type: Boolean,
+            reflectToAttribute: true,
+            value: false
+        },
+
+        label: {
+            type: String,
+            reflectToAttribute: true,
+            value: 'Flight Search'
+        }
+
+    },
+
+    ready: function() {
+        this._progressAuto();
+    },
+    
+    _progressAnimation: function() {
+        this.$.progressBar.style.width = this.value + '%';
+        var component = this;
+        if (this.value == 100) {
+            Polymer.IronDropdownScrollManager.removeScrollLock(component);
+            setTimeout(
+                function() {
+                    component.hide = true
+                }, 300);
+        }
+    },
+
+    _progressAuto: function() {
+        Polymer.IronDropdownScrollManager.pushScrollLock(this);
+        var component = this;
+        for (a = 0; a < 90; a++) {
+            setTimeout(
+                function() {
+                    if (component.value < 90) {
+                        component.value = component.value +1;
+                    }
+                }, a * 500);
+        }
+    }
+});
+</script>

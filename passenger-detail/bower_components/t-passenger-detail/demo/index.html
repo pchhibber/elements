@@ -1,0 +1,18 @@
+<link rel="import" href="../t-passenger-detail.html">
+  
+<link rel="import" href="../../t-section-header/t-section-header.html" />
+<link rel="import" href="../../t-header/t-header.html" />
+<link rel="import" href="../../t-itinerary/t-itinerary.html" />
+<link rel="import" href="../../t-creditcard/t-creditcard.html" />
+<style>
+	body{
+		margin: 0;
+	}
+</style>
+
+        <t-header normal-heading label="Make Payment"></t-header>
+        <t-section-header label="Trip summary"></t-section-header>
+        <t-itinerary is-trip-summary></t-itinerary>
+		<t-passenger-detail></t-passenger-detail>
+        <t-section-header label="Payment Information"></t-section-header>
+		<t-creditcard></t-creditcard>

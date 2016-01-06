@@ -1,0 +1,44 @@
+{
+  "name": "t-overlay",
+  "version": "0.0.0",
+  "authors": [
+    "Sounak Pal <talk2sounak@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "Polymer",
+    "Web",
+    "Components"
+  ],
+  "homepage": "https://github.com/atomelements/t-overlay",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0",
+    "t-button": "atomelements/t-button#0.0.0",
+    "t-header": "travelnxtElements/t-header#0.0.0",
+    "polymer": "Polymer/polymer#^1.0.0"
+  },
+  "devDependencies": {
+    "web-component-tester": "*",
+    "webcomponentsjs": "~0.7.14",
+    "iron-component-page": "PolymerElements/iron-component-page#~1.0.6"
+  },
+  "_release": "0.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.0",
+    "commit": "e2d02399ded383fca655f4bbfc23bf900b2997d9"
+  },
+  "_source": "git://github.com/atomelements/t-overlay.git",
+  "_target": "0.0.0",
+  "_originalSource": "atomelements/t-overlay"
+}

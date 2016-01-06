@@ -1,0 +1,27 @@
+{
+    "name": "Paper Badge",
+    "properties": [
+        {
+            "name": "Properties",
+            "fields": {
+                "for": {
+                    "name": "for",
+                    "type": "string"
+                },
+                "icon": {
+                    "name": "icon",
+                    "type": "string",
+                    "value": ""
+                },
+                "label": {
+                    "name": "label",
+                    "type": "string"
+                },
+                "target": {
+                    "name": "target",
+                    "type": ""
+                }
+            }
+        }
+    ]
+}

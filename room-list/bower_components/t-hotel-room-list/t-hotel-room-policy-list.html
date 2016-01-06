@@ -1,0 +1,81 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="t-hotel-room-policy-list">    
+    <template>
+        <t-text-container>            
+            <template is="dom-if" if="{{_policyLoading}}">
+                <div class="section font-16 text-center">
+                    Please wait, we are fetching policies for your selected itinerary.
+                </div>
+                <div class="horizontal layout flex center-justified">
+                    <t-loader active></t-loader>
+                </div>           
+            </template>
+            <template is="dom-if" if="{{_policyFailed}}">
+                <t-notify active message="Sorry we are having difficulties fetching policies of your selected room. Please select another."></t-notify>
+            </template>
+            <div class="section">
+                <template is="dom-repeat" items="{{policies}}">
+                    <div class="font-16 border-bottom margin-bottom">[[item.type]]</div>
+                    <template is="dom-repeat" items="{{item.rules}}" as="rule">
+                        <div class="font-12 margin-bottom">[[rule]]</div>
+                    </template>             
+                </template>    
+            </div>
+        </t-text-container>             
+        <content select="#policyProvider"></content>
+    </template>
+</dom-module>
+<script>
+    Polymer({
+        is: "t-hotel-room-policy-list",
+
+        properties: {
+            policies: Array
+
+        },
+            _policyProvider: null,
+
+            _policyLoading: false,
+
+            _policyFailed: false,
+
+
+        attached: function(){
+            this._checkAndSubscribeProvider();      
+        },
+
+        showPolicies: function(){
+            this._policyLoading = true;
+            this._policyFailed = false;
+            this.policies = null;
+            this._policyProvider.getPolicies();
+        },
+
+        _checkAndSubscribeProvider: function(){    
+            this.set('_policyProvider', Polymer.dom(this).queryDistributedElements('#policyProvider')[0]);
+            if(!this._policyProvider){
+                console.log('no room list provider resolved with id #policyProvider');
+                return;
+            }
+            if(this._policyProvider.getPolicies && typeof this._policyProvider.getPolicies != 'function'){
+                console.log('no "getPolicies" function is present in given policy provider');
+            }
+            
+            this._policyProvider.addEventListener('room-policy-success', this._successCallback.bind(this));
+            this._policyProvider.addEventListener('room-policy-error', this._errorCallback.bind(this));
+        },
+
+        _successCallback: function(event){
+            this._policyLoading = false;      
+            this._policyFailed = false;
+            this.policies = event.detail;      
+        },
+
+        _errorCallback: function(event){
+            this._policyLoading = false;
+            this._policyFailed = true;
+            
+        }
+    }); 
+</script>

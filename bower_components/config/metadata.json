@@ -1,0 +1,142 @@
+{
+	"elements": [{
+		"name": "t-hotel-search",
+		"category": "hotels",
+		"displayName": "Hotel Search",
+		"location": "https://github.com/travelnxtElements/t-hotel-search"
+	}, {
+		"name": "t-hotel-room-list",
+		"category": "hotels",
+		"displayName": "Room List",
+		"location": "https://github.com/travelnxtElements/t-hotel-room-list"
+	}, {
+		"name": "t-faredetails",
+		"category": "hotels",
+		"displayName": "Fare Details",
+		"location": "https://github.com/travelnxtElements/t-faredetails"
+	}, {
+		"name": "t-search-overlay",
+		"category": "hotels",
+		"displayName": "Search Overlay",
+		"location": "https://github.com/travelnxtElements/t-search-overlay"
+	}, {
+		"name": "t-header",
+		"category": "hotels",
+		"displayName": "Header",
+		"location": "https://github.com/travelnxtElements/t-header"
+	}, {
+		"name": "t-address",
+		"category": "hotels",
+		"displayName": "Address",
+		"location": "https://github.com/travelnxtElements/t-address"
+	}, {
+		"name": "t-passenger-info",
+		"category": "flights",
+		"displayName": "Passenger Info",
+		"location": "https://github.com/travelnxtElements/t-passenger-info"
+	}, {
+		"name": "t-result-item",
+		"category": "flights",
+		"displayName": "Result Item",
+		"location": "https://github.com/travelnxtElements/t-result-item"
+	}, {
+		"name": "t-map-nearby-search",
+		"category": "hotels",
+		"displayName": "Map Nearby Search",
+		"location": "https://github.com/travelnxtElements/t-map-nearby-search"
+	}, {
+		"name": "t-text-container",
+		"category": "hotels",
+		"displayName": "Text Container",
+		"location": "https://github.com/travelnxtElements/t-text-container"
+	}, {
+		"name": "t-starrating",
+		"category": "flights",
+		"displayName": "Star Rating",
+		"location": "https://github.com/travelnxtElements/t-starrating"
+	}, {
+		"name": "t-itinerary",
+		"category": "flights",
+		"displayName": "Itinerary",
+		"location": "https://github.com/travelnxtElements/t-itinerary"
+	}, {
+		"name": "t-creditcard",
+		"category": "flights",
+		"displayName": "Credit Card",
+		"location": "https://github.com/travelnxtElements/t-creditcard"
+	}, {
+		"name": "t-insurance",
+		"category": "flights",
+		"displayName": "Insurance",
+		"location": "https://github.com/travelnxtElements/t-insurance"
+	}, {
+		"name": "t-badge",
+		"category": "flights",
+		"displayName": "Badge",
+		"location": "https://github.com/travelnxtElements/t-badge"
+	}, {
+		"name": "t-hotel-room-item",
+		"category": "Hotels",
+		"displayName": "Hotel Room Item",
+		"location": "https://github.com/travelnxtElements/t-hotel-room-item"
+	}, {
+		"name": "t-search",
+		"category": "flights",
+		"displayName": "Search",
+		"location": "https://github.com/travelnxtElements/t-search"
+	}, {
+		"name": "t-passenger-detail",
+		"category": "flights",
+		"displayName": "Passenger Detail",
+		"location": "https://github.com/travelnxtElements/t-passenger-detail"
+	}, {
+		"name": "t-mystique-auth",
+		"category": "flights",
+		"displayName": "Mystique Auth",
+		"location": "https://github.com/travelnxtElements/t-mystique-auth"
+	}, {
+		"name": "t-home-header",
+		"category": "flights",
+		"displayName": "Home Header",
+		"location": "https://github.com/travelnxtElements/t-home-header"
+	}, {
+		"name": "t-app-footer",
+		"category": "flights",
+		"displayName": "App Footer",
+		"location": "https://github.com/travelnxtElements/t-app-footer"
+	}, {
+		"name": "t-airresult",
+		"category": "flights",
+		"displayName": "Air Result",
+		"location": "https://github.com/travelnxtElements/t-airresult"
+	}, {
+		"name": "paper-badge",
+		"category": "googlecomponents",
+		"displayName": "Paper Badge",
+		"location": "https://github.com/PolymerElements/paper-badge"
+	}, {
+		"name": "paper-dialog",
+		"category": "googlecomponents",
+		"displayName": "Paper Dialog",
+		"location": "https://github.com/PolymerElements/paper-dialog"
+	}, {
+		"name": "paper-icon-button",
+		"category": "googlecomponents",
+		"displayName": "Paper Icon Button",
+		"location": "https://github.com/PolymerElements/paper-icon-button"
+	}, {
+		"name": "demo-tester",
+		"displayName": "Demo Tester",
+		"location": "components/demo-tester"
+	}],
+	"categories": [{
+		"name": "flights",
+		"displayName": "Flights"
+	}, {
+		"name": "hotels",
+		"displayName": "Hotels"
+	}, {
+		"name": "googlecomponents",
+		"displayName": "Google Components"
+	}]
+}
